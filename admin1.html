@@ -14,7 +14,6 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="/style.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -44,15 +43,50 @@
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
-          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-          <li class="nav-item"><a href="blog.html" class="nav-link">Blog Page</a></li>
+          <li class="nav-item has-menu">
+            <a href="services.html" class="nav-link">Services <span class="chevron" aria-hidden="true">&rsaquo;</span></a>
+            <div class="mega-dropdown">
+              <div class="mega-grid">
+                <div class="mega-col">
+                  <h4>Search &amp; Web</h4>
+                  <a href="services.html#service-seo">Search Engine Optimization (SEO)</a>
+                  <a href="services.html#service-web">Website Design &amp; Development</a>
+                  <a href="services.html#service-gmb">Google Business Profile (GMB)</a>
+                  <a href="services.html#service-ecom">E-Commerce Growth Solutions</a>
+                </div>
+                <div class="mega-col">
+                  <h4>Paid &amp; Performance</h4>
+                  <a href="services.html#service-google-ads">Google Ads Management</a>
+                  <a href="services.html#service-meta-ads">Meta Ads (FB &amp; Insta)</a>
+                  <a href="services.html#service-perf">Performance Marketing</a>
+                  <a href="services.html#service-ai">AI &amp; Marketing Automation</a>
+                </div>
+                <div class="mega-col">
+                  <h4>Brand &amp; Content</h4>
+                  <a href="services.html#service-smm">Social Media Marketing</a>
+                  <a href="services.html#service-branding">Branding &amp; Creative Design</a>
+                  <a href="services.html#service-content">Content Creation &amp; Production</a>
+                  <a href="services.html#service-training">Digital Marketing Training</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="academy.html" class="nav-link">Academy</a></li>
+          <li class="nav-item"><a href="partnership.html" class="nav-link">Partnership</a></li>
+          <li class="nav-item"><a href="about.html#founder" class="nav-link">Founder</a></li>
+          <li class="nav-item"><a href="services.html#industries" class="nav-link">Industries</a></li>
+          <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <a href="blog.html" target="_blank" class="btn btn-outline-gold">View Live Blog</a>
       </div>
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNavDrawer">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -137,14 +171,14 @@
   </main>
 
   <!-- EDIT ARTICLE MODAL -->
-  <div class="article-modal-backdrop" id="editModalBackdrop" aria-hidden="true">
-    <div class="article-modal-container" style="max-width: 780px;">
+  <div class="article-modal-backdrop" id="editModalBackdrop" inert>
+    <div class="article-modal-container" style="max-width: 780px;" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
       <div class="modal-header-sticky">
         <div style="display: flex; align-items: center; gap: 10px;">
           <i data-lucide="edit-3" style="color: var(--gold-amber);"></i>
-          <span style="font-weight: 700; color: var(--text-dark); font-size: 1.1rem;">Super Admin Edit Article</span>
+          <span id="editModalTitle" style="font-weight: 700; color: var(--text-dark); font-size: 1.1rem;">Edit Article</span>
         </div>
-        <button class="modal-close-btn" id="closeEditModalBtn"><i data-lucide="x"></i></button>
+        <button class="modal-close-btn" id="closeEditModalBtn" type="button" aria-label="Close editor"><i data-lucide="x"></i></button>
       </div>
 
       <div style="padding: 32px 36px;">
@@ -188,27 +222,27 @@
           </div>
 
           <div class="editor-field">
-            <label>Cover Image URL</label>
+            <label for="editCoverImage">Cover Image URL</label>
             <input type="text" id="editCoverImage" />
           </div>
 
           <div class="editor-field">
-            <label>Video Embed URL</label>
+            <label for="editVideoUrl">Video Embed URL</label>
             <input type="text" id="editVideoUrl" />
           </div>
 
           <div class="editor-field">
-            <label>Excerpt / Summary</label>
+            <label for="editExcerpt">Excerpt / Summary</label>
             <textarea id="editExcerpt" rows="3" required></textarea>
           </div>
 
           <div class="editor-field">
-            <label>Key Takeaways (One per line)</label>
+            <label for="editTakeaways">Key Takeaways (One per line)</label>
             <textarea id="editTakeaways" rows="3"></textarea>
           </div>
 
           <div class="editor-field">
-            <label>Full Article Body HTML</label>
+            <label for="editContent">Full Article Body HTML</label>
             <textarea id="editContent" rows="8" required></textarea>
           </div>
 
@@ -228,6 +262,30 @@
       <p class="cachebugs-credit">Crafted by <a href="https://cachebugs.site/" target="_blank" rel="noopener">Cachebugs</a></p>
     </div>
   </footer>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <button class="mobile-nav-close" id="mobileNavClose" type="button" aria-label="Close menu"><i data-lucide="x"></i></button>
+    <ul class="mobile-nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="academy.html">Academy</a></li>
+      <li><a href="partnership.html">Partnership</a></li>
+      <li><a href="about.html#founder">Founder</a></li>
+      <li><a href="services.html#industries">Industries</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-ctas">
+      <a href="academy.html" class="btn btn-outline-gold">Explore Courses</a>
+      <a href="index.html#contact" class="btn btn-primary-gold">Get Free Proposal</a>
+    </div>
+  </nav>
+
+  <script type="module" src="/src/main.js"></script>
 
   <script>
     // SUPER ADMIN CREDENTIALS
@@ -393,7 +451,7 @@
         });
       }
 
-      if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (window.refreshIcons) window.refreshIcons();
     }
 
     // Approve Handler
@@ -511,17 +569,26 @@
 
       const modal = document.getElementById('editModalBackdrop');
       modal.classList.add('open');
+      modal.inert = false;
       document.body.style.overflow = 'hidden';
+      document.getElementById('editTitle').focus();
     }
 
     function closeEditModal() {
       const modal = document.getElementById('editModalBackdrop');
       modal.classList.remove('open');
+      modal.inert = true;
       document.body.style.overflow = '';
     }
 
     document.getElementById('closeEditModalBtn').addEventListener('click', closeEditModal);
     document.getElementById('cancelEditBtn').addEventListener('click', closeEditModal);
+    document.getElementById('editModalBackdrop').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeEditModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('editModalBackdrop').classList.contains('open')) closeEditModal();
+    });
 
     document.getElementById('editArticleForm').addEventListener('submit', (e) => {
       e.preventDefault();

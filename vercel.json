@@ -1,8 +1,6 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/blog/admin1", "destination": "/blog/admin1.html" },
-    { "source": "/blog/admin1.html", "destination": "/blog/admin1.html" },
     { "source": "/admin1", "destination": "/admin1.html" },
     { "source": "/admin1.html", "destination": "/admin1.html" },
     { "source": "/blogeditor", "destination": "/blogeditor.html" },

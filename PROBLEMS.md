@@ -4,6 +4,8 @@ Audit of every file in the repository (10 HTML pages, `style.css`, the build and
 
 **How it was checked:** I read every file by hand. I also ran `vite build` and `html-validate` on all pages, checked every local link and `#anchor` target, and compared the CSS variables each file uses with the ones `style.css` defines.
 
+> **Status (UI/UX pass):** fixed: #1, #2, #6, #9, #10, #11, the mobile/desktop layout issues, the footer/nav link items in #16–#18, the accessibility items, the image-weight and unpinned-Lucide items, and the missing/undefined CSS variables. The academy and partnership forms now send the enquiry via WhatsApp, and the newsletter via email (#7: still no backend). **Still open:** #3 (admin passwords in client code), #4/#5 (localStorage-only blog CMS), the SEO metadata items (#12–#15), and the content/claims items. Those need decisions or a backend.
+
 Severity: 🔴 Critical (site broken, or a security hole) · 🟠 High (a major feature is broken or leads are lost) · 🟡 Medium (SEO, accessibility, correctness) · ⚪ Low (cleanup)
 
 ---

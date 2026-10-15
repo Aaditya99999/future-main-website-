@@ -26,7 +26,6 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="/style.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -56,10 +55,39 @@
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
-          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+          <li class="nav-item has-menu">
+            <a href="services.html" class="nav-link">Services <span class="chevron" aria-hidden="true">&rsaquo;</span></a>
+            <div class="mega-dropdown">
+              <div class="mega-grid">
+                <div class="mega-col">
+                  <h4>Search &amp; Web</h4>
+                  <a href="services.html#service-seo">Search Engine Optimization (SEO)</a>
+                  <a href="services.html#service-web">Website Design &amp; Development</a>
+                  <a href="services.html#service-gmb">Google Business Profile (GMB)</a>
+                  <a href="services.html#service-ecom">E-Commerce Growth Solutions</a>
+                </div>
+                <div class="mega-col">
+                  <h4>Paid &amp; Performance</h4>
+                  <a href="services.html#service-google-ads">Google Ads Management</a>
+                  <a href="services.html#service-meta-ads">Meta Ads (FB &amp; Insta)</a>
+                  <a href="services.html#service-perf">Performance Marketing</a>
+                  <a href="services.html#service-ai">AI &amp; Marketing Automation</a>
+                </div>
+                <div class="mega-col">
+                  <h4>Brand &amp; Content</h4>
+                  <a href="services.html#service-smm">Social Media Marketing</a>
+                  <a href="services.html#service-branding">Branding &amp; Creative Design</a>
+                  <a href="services.html#service-content">Content Creation &amp; Production</a>
+                  <a href="services.html#service-training">Digital Marketing Training</a>
+                </div>
+              </div>
+            </div>
+          </li>
           <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="academy.html" class="nav-link active">Academy</a></li>
+          <li class="nav-item"><a href="academy.html" class="nav-link active" aria-current="page">Academy</a></li>
           <li class="nav-item"><a href="partnership.html" class="nav-link">Partnership</a></li>
+          <li class="nav-item"><a href="about.html#founder" class="nav-link">Founder</a></li>
+          <li class="nav-item"><a href="services.html#industries" class="nav-link">Industries</a></li>
           <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
         </ul>
       </nav>
@@ -69,7 +97,7 @@
         <a href="#demoForm" class="btn btn-primary-gold">Book Demo Class</a>
       </div>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNavDrawer">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -129,12 +157,12 @@
             <form id="academyEnrollForm">
               <div class="demo-input-group">
                 <label for="studentName">Full Name</label>
-                <input type="text" id="studentName" placeholder="e.g. Rahul Sharma" required />
+                <input type="text" id="studentName" placeholder="e.g. Rahul Sharma" autocomplete="name" required />
               </div>
 
               <div class="demo-input-group">
                 <label for="studentPhone">Phone / WhatsApp Number</label>
-                <input type="tel" id="studentPhone" placeholder="+91 98765 43210" required />
+                <input type="tel" id="studentPhone" placeholder="+91 98765 43210" autocomplete="tel" inputmode="tel" pattern="[0-9+\s-]{10,15}" title="Enter a 10-digit mobile number" required />
               </div>
 
               <div class="demo-input-group">
@@ -157,12 +185,12 @@
               </div>
 
               <button type="submit" class="btn btn-primary-gold shiny-btn" style="width: 100%; padding: 14px; margin-top: 10px; font-size: 1rem;">
-                Reserve Free Spot Now &rarr;
+                Reserve Free Spot via WhatsApp &rarr;
               </button>
             </form>
 
-            <div id="enrollSuccess" style="display: none; background: #DCFCE7; color: #166534; padding: 14px; border-radius: 8px; font-weight: 700; margin-top: 16px; text-align: center;">
-              <i data-lucide="check-circle" style="vertical-align: middle; margin-right: 4px;"></i> Demo Spot Reserved! Our career counselor will call you within 2 hours.
+            <div id="enrollSuccess" role="status" aria-live="polite" style="display: none; background: #DCFCE7; color: #166534; padding: 14px; border-radius: 8px; font-weight: 700; margin-top: 16px; text-align: center;">
+              <i data-lucide="check-circle" style="vertical-align: middle; margin-right: 4px;"></i> WhatsApp opened with your details — press send and our counselor will confirm your demo slot.
             </div>
           </div>
         </div>
@@ -413,20 +441,18 @@
       <div class="footer-col brand-col">
         <a href="index.html" class="brand-logo" aria-label="Future Edge Home">
           <div class="logo-mark">
-            <img src="/logo.png" alt="Future Edge Logo" width="36" height="36" style="border-radius: 8px;" />
+            <img src="/logo.png" alt="" width="36" height="36" loading="lazy" style="border-radius: 8px;" />
           </div>
           <div class="logo-text">
             <span class="brand-title">FUTURE EDGE</span>
             <span class="brand-subtitle">DIGITAL MARKETING</span>
           </div>
         </a>
-        <p class="footer-about">
-          Uttar Pradesh's Premier Digital Marketing Agency and Career Training Academy. Empowering local businesses to scale and professionals to master AI-driven marketing skills.
-        </p>
+        <p class="footer-about">Future Edge supports businesses with connected marketing services and helps aspiring marketers build practical digital skills.</p>
         <p class="footer-contact">
           Kanpur, Uttar Pradesh, India<br />
-          <strong>Phone:</strong> +91-6393213527<br />
-          <strong>Email:</strong> futureedgedigitalmarketing@gmail.com
+          <strong>Phone:</strong> <a href="tel:+916393213527">+91-6393213527</a><br />
+          <strong>Email:</strong> <a href="mailto:futureedgedigitalmarketing@gmail.com">futureedgedigitalmarketing@gmail.com</a>
         </p>
       </div>
 
@@ -445,11 +471,11 @@
       <div class="footer-col">
         <h4>Academy Courses</h4>
         <ul>
-          <li><a href="academy.html">Advanced Digital Marketing</a></li>
-          <li><a href="academy.html">SEO &amp; Google Ads Course</a></li>
-          <li><a href="academy.html">Meta Ads &amp; Performance</a></li>
-          <li><a href="academy.html">AI &amp; Marketing Automation</a></li>
-          <li><a href="academy.html">Internship &amp; Placement</a></li>
+          <li><a href="academy.html#curriculum">Advanced Digital Marketing</a></li>
+          <li><a href="academy.html#curriculum">SEO &amp; Google Ads Course</a></li>
+          <li><a href="academy.html#curriculum">Meta Ads &amp; Performance</a></li>
+          <li><a href="academy.html#curriculum">AI &amp; Marketing Automation</a></li>
+          <li><a href="academy.html#demoForm">Book a Free Demo Class</a></li>
         </ul>
       </div>
 
@@ -460,49 +486,79 @@
           <li><a href="blog.html">Blog &amp; Insights</a></li>
           <li><a href="about.html#founder">Meet Founder Vivek</a></li>
           <li><a href="services.html#industries">Industries We Serve</a></li>
+          <li><a href="faq.html">FAQ</a></li>
           <li><a href="index.html#contact">Contact Us</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Legal &amp; Policy</h4>
+        <h4>Legal &amp; Partners</h4>
         <ul>
           <li><a href="privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="partnership.html">Become a Partner</a></li>
-          <li><a href="blogeditor.html" target="_blank" style="opacity: 0.7;">Blog Editor Portal</a></li>
+          <li><a href="partnership.html">Franchise &amp; Partnerships</a></li>
         </ul>
+        <a href="partnership.html" class="btn btn-primary-gold footer-partner-btn">Become a Partner</a>
       </div>
     </div>
 
     <div class="container footer-bottom">
       <p>&copy; <span id="currentYear">2026</span> Future Edge Digital Marketing. All rights reserved.</p>
       <p class="cachebugs-credit">Crafted by <a href="https://cachebugs.site/" target="_blank" rel="noopener">Cachebugs</a></p>
+      <p>Digital Marketing Agency &amp; Academy in Uttar Pradesh.</p>
     </div>
   </footer>
 
-  <script>
-    // FAQ Accordion Toggle
-    document.querySelectorAll('.faq-acc-header').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const isActive = item.classList.contains('active');
-        document.querySelectorAll('.faq-acc-item').forEach(i => i.classList.remove('active'));
-        if (!isActive) item.classList.add('active');
-      });
-    });
+  <!-- Quick Floating Contacts -->
+  <div class="floating-contact">
+    <a href="tel:+916393213527" class="float-btn float-phone" aria-label="Call Future Edge">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </a>
+    <a href="https://wa.me/916393213527" target="_blank" rel="noopener" class="float-btn float-wa" aria-label="Chat with Future Edge on WhatsApp">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </a>
+  </div>
 
-    // Form Submit Handler
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <button class="mobile-nav-close" id="mobileNavClose" type="button" aria-label="Close menu"><i data-lucide="x"></i></button>
+    <ul class="mobile-nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="academy.html" class="active" aria-current="page">Academy</a></li>
+      <li><a href="partnership.html">Partnership</a></li>
+      <li><a href="about.html#founder">Founder</a></li>
+      <li><a href="services.html#industries">Industries</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-ctas">
+      <a href="academy.html" class="btn btn-outline-gold">Explore Courses</a>
+      <a href="index.html#contact" class="btn btn-primary-gold">Get Free Proposal</a>
+    </div>
+  </nav>
+
+  <script type="module" src="/src/main.js"></script>
+
+  <script>
+    // Demo class form: send the request to the academy team on WhatsApp.
     document.getElementById('academyEnrollForm').addEventListener('submit', (e) => {
       e.preventDefault();
+      const form = e.target;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const val = (id) => document.getElementById(id).value.trim();
+      const label = (id) => { const s = document.getElementById(id); return s.options[s.selectedIndex].text; };
+      const text = [
+        'Hello Future Edge Academy, I would like to book a free demo class.',
+        `Name: ${val('studentName')}`,
+        `Phone: ${val('studentPhone')}`,
+        `Goal: ${label('studentGoal')}`,
+        `Preferred mode: ${label('batchPref')}`
+      ].join('\n');
+      window.open(`https://wa.me/916393213527?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
       document.getElementById('enrollSuccess').style.display = 'block';
-      document.getElementById('academyEnrollForm').reset();
-      setTimeout(() => {
-        document.getElementById('enrollSuccess').style.display = 'none';
-      }, 7000);
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof lucide !== 'undefined') lucide.createIcons();
     });
   </script>
 </body>

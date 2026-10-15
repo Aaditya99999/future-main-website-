@@ -17,7 +17,7 @@
   <meta property="og:title" content="Digital Marketing Blog & Insights | Future Edge" />
   <meta property="og:description"
     content="Actionable guides, AI marketing playbooks, local SEO strategies, and performance marketing blueprints." />
-  <meta property="og:image" content="/hero_team.png" />
+  <meta property="og:image" content="/hero_team.jpg" />
   <meta property="og:url" content="https://futureedgedigitalmarketing.com/blog.html" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,15 +26,6 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="/style.css" />
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-      }
-    }
-  </script>
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -66,34 +57,34 @@
           <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
           <li class="nav-item has-menu">
-            <a href="services.html" class="nav-link">Services <span class="chevron">&rsaquo;</span></a>
+            <a href="services.html" class="nav-link">Services <span class="chevron" aria-hidden="true">&rsaquo;</span></a>
             <div class="mega-dropdown">
               <div class="mega-grid">
                 <div class="mega-col">
-                  <h4>Search & Web</h4>
+                  <h4>Search &amp; Web</h4>
                   <a href="services.html#service-seo">Search Engine Optimization (SEO)</a>
-                  <a href="services.html#service-web">Website Design & Development</a>
+                  <a href="services.html#service-web">Website Design &amp; Development</a>
                   <a href="services.html#service-gmb">Google Business Profile (GMB)</a>
                   <a href="services.html#service-ecom">E-Commerce Growth Solutions</a>
                 </div>
                 <div class="mega-col">
-                  <h4>Paid & Performance</h4>
+                  <h4>Paid &amp; Performance</h4>
                   <a href="services.html#service-google-ads">Google Ads Management</a>
-                  <a href="services.html#service-meta-ads">Meta Ads (FB & Insta)</a>
+                  <a href="services.html#service-meta-ads">Meta Ads (FB &amp; Insta)</a>
                   <a href="services.html#service-perf">Performance Marketing</a>
-                  <a href="services.html#service-ai">AI & Marketing Automation</a>
+                  <a href="services.html#service-ai">AI &amp; Marketing Automation</a>
                 </div>
                 <div class="mega-col">
-                  <h4>Brand & Content</h4>
+                  <h4>Brand &amp; Content</h4>
                   <a href="services.html#service-smm">Social Media Marketing</a>
-                  <a href="services.html#service-branding">Branding & Creative Design</a>
-                  <a href="services.html#service-content">Content Creation & Production</a>
+                  <a href="services.html#service-branding">Branding &amp; Creative Design</a>
+                  <a href="services.html#service-content">Content Creation &amp; Production</a>
                   <a href="services.html#service-training">Digital Marketing Training</a>
                 </div>
               </div>
             </div>
           </li>
-          <li class="nav-item"><a href="blog.html" class="nav-link active">Blog</a></li>
+          <li class="nav-item"><a href="blog.html" class="nav-link active" aria-current="page">Blog</a></li>
           <li class="nav-item"><a href="academy.html" class="nav-link">Academy</a></li>
           <li class="nav-item"><a href="partnership.html" class="nav-link">Partnership</a></li>
           <li class="nav-item"><a href="about.html#founder" class="nav-link">Founder</a></li>
@@ -107,7 +98,7 @@
         <a href="index.html#contact" class="btn btn-primary-gold">Get Proposal</a>
       </div>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNavDrawer">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -144,28 +135,28 @@
     </section>
 
     <!-- Featured Post Banner -->
-    <section class="featured-post-section">
+    <section class="featured-post-section" id="featuredSection">
       <div class="container">
-        <div class="featured-card" id="featuredArticleCard" style="cursor: pointer;" onclick="openArticleModal('post-1')">
-          <div class="featured-img-wrap" style="background-image: linear-gradient(135deg, rgba(26,50,93,0.85), rgba(15,23,42,0.9)), url('./partnership_ai_hero.png'); background-size: cover; background-position: center;">
+        <div class="featured-card" id="featuredArticleCard" data-article-id="post-1" role="button" tabindex="0" style="cursor: pointer;">
+          <div class="featured-img-wrap" style="background-image: linear-gradient(135deg, rgba(26,50,93,0.85), rgba(15,23,42,0.9)), url('/partnership_ai_hero.jpg'); background-size: cover; background-position: center;">
             <span class="featured-badge">Featured Article</span>
           </div>
           <div class="featured-content">
             <div class="post-meta-top">
-              <span class="cat-tag">AI & SEO</span>
-              <span>&bull;</span>
-              <span>Aug 24, 2026</span>
-              <span>&bull;</span>
-              <span>6 min read</span>
+              <span class="cat-tag" id="featCategory">AI & SEO</span>
+              <span aria-hidden="true">&bull;</span>
+              <span id="featDate">Aug 24, 2026</span>
+              <span aria-hidden="true">&bull;</span>
+              <span id="featReadTime">6 min read</span>
             </div>
-            <h2>The Future of AI-Powered SEO in 2026: How UP Businesses Can Dominate Local Search</h2>
-            <p>Discover how generative search engines (GEO), conversational AI algorithms, and hyper-local schema markup are reshaping how customers in Uttar Pradesh find services online.</p>
+            <h2 id="featTitle">The Future of AI-Powered SEO in 2026: How UP Businesses Can Dominate Local Search</h2>
+            <p id="featExcerpt">Discover how generative search engines (GEO), conversational AI algorithms, and hyper-local schema markup are reshaping how customers in Uttar Pradesh find services online.</p>
             <div class="author-bar">
               <div class="author-info">
-                <div class="author-avatar">VS</div>
+                <div class="author-avatar" id="featAvatar">VS</div>
                 <div class="author-details">
-                  <span class="author-name">Vivek Sharma</span>
-                  <span class="author-title">Founder & Growth Strategist</span>
+                  <span class="author-name" id="featAuthor">Vivek Sharma</span>
+                  <span class="author-title" id="featAuthorRole">Founder & Growth Strategist</span>
                 </div>
               </div>
               <span class="read-article-btn">Read Article &rarr;</span>
@@ -197,11 +188,12 @@
           <h2>Stay Ahead of the Digital Curve</h2>
           <p>Get exclusive growth blueprints, local marketing data reports, and agency strategies delivered straight to your inbox every week.</p>
           <form class="newsletter-form-inline" id="newsletterForm">
-            <input type="email" id="newsletterEmail" placeholder="Enter your business email address..." required />
+            <label for="newsletterEmail" class="visually-hidden">Business email address</label>
+            <input type="email" id="newsletterEmail" placeholder="Enter your business email address..." autocomplete="email" required />
             <button type="submit" class="btn btn-primary-gold shiny-btn">Subscribe Free &rarr;</button>
           </form>
-          <div id="newsletterSuccess" style="display:none; color: var(--gold-pale); font-weight: 700; margin-top: 16px;">
-            <i data-lucide="check-circle" style="vertical-align: middle; margin-right: 6px;"></i> Success! You're subscribed to Future Edge Insights.
+          <div id="newsletterSuccess" role="status" aria-live="polite" style="display:none; color: var(--gold-pale); font-weight: 700; margin-top: 16px;">
+            <i data-lucide="check-circle" style="vertical-align: middle; margin-right: 6px;"></i> Your email app is opening with the subscription request — just press send.
           </div>
         </div>
       </div>
@@ -209,19 +201,19 @@
   </main>
 
   <!-- Full Article Reader Modal -->
-  <div class="article-modal-backdrop" id="articleModalBackdrop" aria-hidden="true">
-    <div class="article-modal-container" id="articleModalContainer">
+  <div class="article-modal-backdrop" id="articleModalBackdrop" inert>
+    <div class="article-modal-container" id="articleModalContainer" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-header-sticky">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <img src="/logo.png" alt="Logo" width="28" height="28" style="border-radius: 6px;" />
+          <img src="/logo.png" alt="" width="28" height="28" style="border-radius: 6px;" />
           <span style="font-weight: 700; color: var(--text-dark); font-size: 0.9rem;">FUTURE EDGE INSIGHTS</span>
         </div>
-        <button class="modal-close-btn" id="closeModalBtn" aria-label="Close article"><i data-lucide="x"></i></button>
+        <button class="modal-close-btn" id="closeModalBtn" type="button" aria-label="Close article"><i data-lucide="x"></i></button>
       </div>
 
       <div class="article-body-wrapper">
         <span class="article-category-badge" id="modalCategory">Category</span>
-        <h1 class="article-main-title" id="modalTitle">Article Title Goes Here</h1>
+        <h2 class="article-main-title" id="modalTitle">Article Title Goes Here</h2>
 
         <div class="article-author-header">
           <div class="author-avatar" id="modalAvatar">VS</div>
@@ -245,9 +237,9 @@
         <div class="article-share-bar">
           <span style="font-weight: 700; color: var(--text-dark);">Enjoyed this read? Share it:</span>
           <div class="share-btns">
-            <button class="share-btn" onclick="copyArticleLink()"><i data-lucide="link"></i> Copy Link</button>
-            <button class="share-btn" onclick="shareWhatsApp()"><i data-lucide="message-square"></i> WhatsApp</button>
-            <button class="share-btn" onclick="shareLinkedIn()"><i data-lucide="share-2"></i> LinkedIn</button>
+            <button class="share-btn" type="button" onclick="copyArticleLink()"><i data-lucide="link"></i> Copy Link</button>
+            <button class="share-btn" type="button" onclick="shareWhatsApp()"><i data-lucide="message-square"></i> WhatsApp</button>
+            <button class="share-btn" type="button" onclick="shareLinkedIn()"><i data-lucide="share-2"></i> LinkedIn</button>
           </div>
         </div>
       </div>
@@ -260,20 +252,18 @@
       <div class="footer-col brand-col">
         <a href="index.html" class="brand-logo" aria-label="Future Edge Home">
           <div class="logo-mark">
-            <img src="/logo.png" alt="Future Edge Logo" width="36" height="36" style="border-radius: 8px;" />
+            <img src="/logo.png" alt="" width="36" height="36" loading="lazy" style="border-radius: 8px;" />
           </div>
           <div class="logo-text">
             <span class="brand-title">FUTURE EDGE</span>
             <span class="brand-subtitle">DIGITAL MARKETING</span>
           </div>
         </a>
-        <p class="footer-about">
-          Uttar Pradesh's Premier Digital Marketing Agency and Career Training Academy. Empowering local businesses to scale and professionals to master AI-driven marketing skills.
-        </p>
+        <p class="footer-about">Future Edge supports businesses with connected marketing services and helps aspiring marketers build practical digital skills.</p>
         <p class="footer-contact">
           Kanpur, Uttar Pradesh, India<br />
-          <strong>Phone:</strong> +91-6393213527<br />
-          <strong>Email:</strong> futureedgedigitalmarketing@gmail.com
+          <strong>Phone:</strong> <a href="tel:+916393213527">+91-6393213527</a><br />
+          <strong>Email:</strong> <a href="mailto:futureedgedigitalmarketing@gmail.com">futureedgedigitalmarketing@gmail.com</a>
         </p>
       </div>
 
@@ -283,20 +273,20 @@
           <li><a href="services.html#service-seo">SEO Services</a></li>
           <li><a href="services.html#service-web">Website Development</a></li>
           <li><a href="services.html#service-google-ads">Google Ads Management</a></li>
-          <li><a href="services.html#service-meta-ads">Meta Ads (FB & Insta)</a></li>
+          <li><a href="services.html#service-meta-ads">Meta Ads (FB &amp; Insta)</a></li>
           <li><a href="services.html#service-smm">Social Media Marketing</a></li>
-          <li><a href="services.html#service-branding">Branding & Creative Design</a></li>
+          <li><a href="services.html#service-branding">Branding &amp; Creative Design</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Academy Courses</h4>
         <ul>
-          <li><a href="academy.html">Advanced Digital Marketing</a></li>
-          <li><a href="academy.html">SEO & Google Ads Course</a></li>
-          <li><a href="academy.html">Meta Ads & Performance</a></li>
-          <li><a href="academy.html">AI & Marketing Automation</a></li>
-          <li><a href="academy.html">Internship & Placement</a></li>
+          <li><a href="academy.html#curriculum">Advanced Digital Marketing</a></li>
+          <li><a href="academy.html#curriculum">SEO &amp; Google Ads Course</a></li>
+          <li><a href="academy.html#curriculum">Meta Ads &amp; Performance</a></li>
+          <li><a href="academy.html#curriculum">AI &amp; Marketing Automation</a></li>
+          <li><a href="academy.html#demoForm">Book a Free Demo Class</a></li>
         </ul>
       </div>
 
@@ -307,24 +297,18 @@
           <li><a href="blog.html">Blog &amp; Insights</a></li>
           <li><a href="about.html#founder">Meet Founder Vivek</a></li>
           <li><a href="services.html#industries">Industries We Serve</a></li>
+          <li><a href="faq.html">FAQ</a></li>
           <li><a href="index.html#contact">Contact Us</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Legal & Policy</h4>
+        <h4>Legal &amp; Partners</h4>
         <ul>
           <li><a href="privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="#">Terms & Conditions</a></li>
-          <li><a href="#">Refund Policy</a></li>
-          <li><a href="#">Disclaimer & Cookies</a></li>
-          <li><a href="#">Sitemap</a></li>
-          <li style="margin-top: 12px; display: flex; align-items: center; gap: 8px;">
-            <a href="partnership.html" style="margin-bottom: 0; white-space: nowrap;">Franchise:</a>
-            <a href="partnership.html" class="btn btn-primary-gold shiny-btn"
-              style="padding: 4px 12px; font-size: 0.8rem; margin: 0; white-space: nowrap;">Become a Partner</a>
-          </li>
+          <li><a href="partnership.html">Franchise &amp; Partnerships</a></li>
         </ul>
+        <a href="partnership.html" class="btn btn-primary-gold footer-partner-btn">Become a Partner</a>
       </div>
     </div>
 
@@ -337,40 +321,33 @@
 
   <!-- Quick Floating Contacts -->
   <div class="floating-contact">
-    <a href="tel:+91-6393213527" class="float-btn float-phone" aria-label="Call Future Edge Marketing Experts">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path
-          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
+    <a href="tel:+916393213527" class="float-btn float-phone" aria-label="Call Future Edge">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     </a>
-    <a href="https://wa.me/916393213527" target="_blank" rel="noopener" class="float-btn float-wa"
-      aria-label="WhatsApp Future Edge Team">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path
-          d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-      </svg>
+    <a href="https://wa.me/916393213527" target="_blank" rel="noopener" class="float-btn float-wa" aria-label="Chat with Future Edge on WhatsApp">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
     </a>
   </div>
 
   <!-- Mobile Nav Drawer -->
   <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
   <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
-    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><i data-lucide="x"></i></button>
+    <button class="mobile-nav-close" id="mobileNavClose" type="button" aria-label="Close menu"><i data-lucide="x"></i></button>
     <ul class="mobile-nav-list">
-      <li><a href="index.html" onclick="closeMobileNav()">Home</a></li>
-      <li><a href="about.html" onclick="closeMobileNav()">About Us</a></li>
-      <li><a href="services.html" onclick="closeMobileNav()">Services</a></li>
-      <li><a href="blog.html" onclick="closeMobileNav()">Blog</a></li>
-      <li><a href="academy.html" onclick="closeMobileNav()">Academy</a></li>
-      <li><a href="partnership.html" onclick="closeMobileNav()">Partnership</a></li>
-      <li><a href="about.html#founder" onclick="closeMobileNav()">Founder</a></li>
-      <li><a href="services.html#industries" onclick="closeMobileNav()">Industries</a></li>
-      <li><a href="faq.html" onclick="closeMobileNav()">FAQ</a></li>
-      <li><a href="index.html#contact" onclick="closeMobileNav()">Contact</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html" class="active" aria-current="page">Blog</a></li>
+      <li><a href="academy.html">Academy</a></li>
+      <li><a href="partnership.html">Partnership</a></li>
+      <li><a href="about.html#founder">Founder</a></li>
+      <li><a href="services.html#industries">Industries</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
     </ul>
     <div class="mobile-nav-ctas">
-      <a href="academy.html" class="btn btn-outline-gold" onclick="closeMobileNav()">Explore Courses</a>
-      <a href="index.html#contact" class="btn btn-primary-gold" onclick="closeMobileNav()">Get Free Proposal</a>
+      <a href="academy.html" class="btn btn-outline-gold">Explore Courses</a>
+      <a href="index.html#contact" class="btn btn-primary-gold">Get Free Proposal</a>
     </div>
   </nav>
 
@@ -580,6 +557,50 @@
       return [...approved, ...legacy, ...activeDefaults];
     }
 
+    // Escape user-entered text before it goes into markup.
+    function esc(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+    }
+
+    // Only allow http(s) and data:image URLs for cover images.
+    function safeImageUrl(url) {
+      const u = String(url || '').trim();
+      return /^(https?:\/\/|\/|data:image\/)/i.test(u) ? u.replace(/['"()\\]/g, encodeURIComponent) : '';
+    }
+
+    function initialsFor(article) {
+      if (article.avatar) return article.avatar;
+      return String(article.author || 'FE').split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+    }
+
+    function makeClickable(el, articleId) {
+      el.dataset.articleId = articleId;
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.onclick = () => openArticleModal(articleId);
+      el.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openArticleModal(articleId); }
+      };
+    }
+
+    // Featured banner always shows the newest article.
+    function renderFeatured(article) {
+      const section = document.getElementById('featuredSection');
+      if (!article) { section.hidden = true; return; }
+      section.hidden = false;
+      document.getElementById('featCategory').textContent = article.category;
+      document.getElementById('featDate').textContent = article.date;
+      document.getElementById('featReadTime').textContent = article.readTime || '';
+      document.getElementById('featTitle').textContent = article.title;
+      document.getElementById('featExcerpt').textContent = article.excerpt || '';
+      document.getElementById('featAvatar').textContent = initialsFor(article);
+      document.getElementById('featAuthor').textContent = article.author || '';
+      document.getElementById('featAuthorRole').textContent = article.authorRole || 'Contributor';
+      const card = document.getElementById('featuredArticleCard');
+      card.setAttribute('aria-label', `Read featured article: ${article.title}`);
+      makeClickable(card, article.id);
+    }
+
     // Render Blog Grid Cards
     function renderArticles(articlesToRender) {
       const gridContainer = document.getElementById('blogGrid');
@@ -593,29 +614,31 @@
       noResults.style.display = 'none';
 
       articlesToRender.forEach(article => {
-        const card = document.createElement('div');
+        const card = document.createElement('article');
         card.className = 'blog-card';
         card.style.cursor = 'pointer';
-        card.onclick = () => openArticleModal(article.id);
+        card.setAttribute('aria-label', `Read article: ${article.title}`);
+        makeClickable(card, article.id);
 
-        const bgStyle = article.coverImage ? 
-          `background-image: linear-gradient(180deg, transparent 50%, rgba(26,50,93,0.4) 100%), url('${article.coverImage}'); background-size: cover; background-position: center;` : 
-          `background-image: ${article.bgGradient};`;
+        const cover = safeImageUrl(article.coverImage);
+        const bgStyle = cover ?
+          `background-image: linear-gradient(180deg, transparent 50%, rgba(26,50,93,0.4) 100%), url('${cover}'); background-size: cover; background-position: center;` :
+          `background-image: ${article.bgGradient || 'linear-gradient(135deg, #0F2042 0%, #1A325D 100%)'};`;
 
         card.innerHTML = `
           <div class="blog-card-img" style="${bgStyle} display: flex; align-items: flex-end; padding: 16px;">
-            <span class="cat-tag" style="background: rgba(255,255,255,0.9); padding: 4px 10px; border-radius: var(--radius-full); z-index: 2;">${article.category}</span>
+            <span class="cat-tag" style="background: rgba(255,255,255,0.9); padding: 4px 10px; border-radius: var(--radius-full); z-index: 2;">${esc(article.category)}</span>
           </div>
           <div class="blog-card-body">
-            <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">${article.date} &bull; ${article.readTime}</div>
-            <h3 class="blog-card-title">${article.title}</h3>
-            <p class="blog-card-excerpt">${article.excerpt}</p>
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">${esc(article.date)} &bull; ${esc(article.readTime)}</div>
+            <h3 class="blog-card-title">${esc(article.title)}</h3>
+            <p class="blog-card-excerpt">${esc(article.excerpt)}</p>
             <div class="blog-card-footer">
               <div class="author-info">
-                <div class="author-avatar" style="width: 32px; height: 32px; font-size: 0.8rem;">${article.avatar}</div>
-                <span class="author-name" style="font-size: 0.85rem;">${article.author}</span>
+                <div class="author-avatar" style="width: 32px; height: 32px; font-size: 0.8rem;" aria-hidden="true">${esc(initialsFor(article))}</div>
+                <span class="author-name" style="font-size: 0.85rem;">${esc(article.author)}</span>
               </div>
-              <span class="read-article-btn">Read Article &rarr;</span>
+              <span class="read-article-btn" aria-hidden="true">Read Article &rarr;</span>
             </div>
           </div>
         `;
@@ -629,20 +652,29 @@
 
     function filterArticles() {
       const all = getAllArticles();
+      const query = currentSearch.toLowerCase();
+      const filtering = currentCategory !== 'all' || query !== '';
+
+      // Unfiltered: newest article is featured, the rest go in the grid (no duplicate).
+      if (!filtering) {
+        renderFeatured(all[0]);
+        renderArticles(all.slice(1));
+        return;
+      }
+
+      document.getElementById('featuredSection').hidden = true;
       const filtered = all.filter(art => {
         const matchesCategory = (currentCategory === 'all' || art.category.toLowerCase() === currentCategory.toLowerCase());
-        const matchesSearch = currentSearch === '' ||
-          art.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
-          art.excerpt.toLowerCase().includes(currentSearch.toLowerCase()) ||
-          art.category.toLowerCase().includes(currentSearch.toLowerCase());
-        return matchesCategory && matchesSearch;
+        const haystack = [art.title, art.excerpt, art.category, art.author, (art.takeaways || []).join(' '),
+          String(art.content || '').replace(/<[^>]+>/g, ' ')].join(' ').toLowerCase();
+        return matchesCategory && (query === '' || haystack.includes(query));
       });
       renderArticles(filtered);
     }
 
     // Initialize Category Tabs
     document.addEventListener('DOMContentLoaded', () => {
-      renderArticles(getAllArticles());
+      filterArticles();
 
       const searchInput = document.getElementById('blogSearchInput');
       if (searchInput) {
@@ -652,23 +684,29 @@
         });
       }
 
-      const tabs = document.querySelectorAll('.cat-btn');
+      const tabs = document.querySelectorAll('#categoryTabs .cat-btn');
       tabs.forEach(tab => {
+        tab.setAttribute('type', 'button');
+        tab.setAttribute('aria-pressed', String(tab.classList.contains('active')));
         tab.addEventListener('click', () => {
-          tabs.forEach(t => t.classList.remove('active'));
+          tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-pressed', 'false'); });
           tab.classList.add('active');
+          tab.setAttribute('aria-pressed', 'true');
           currentCategory = tab.dataset.category;
           filterArticles();
         });
       });
 
-      // Newsletter Form Submit
+      // Newsletter: send the subscription request by email (no mailing-list backend yet).
       const newsForm = document.getElementById('newsletterForm');
       if (newsForm) {
         newsForm.addEventListener('submit', (e) => {
           e.preventDefault();
+          const email = document.getElementById('newsletterEmail').value.trim();
+          const subject = encodeURIComponent('Subscribe me to Future Edge Insights');
+          const body = encodeURIComponent(`Please add ${email} to the Future Edge Insights newsletter.`);
+          window.location.href = `mailto:futureedgedigitalmarketing@gmail.com?subject=${subject}&body=${body}`;
           document.getElementById('newsletterSuccess').style.display = 'block';
-          document.getElementById('newsletterEmail').value = '';
         });
       }
 
@@ -681,25 +719,44 @@
           if (e.target === backdrop) closeArticleModal();
         });
       }
+
+      document.addEventListener('keydown', (e) => {
+        if (!backdrop.classList.contains('open')) return;
+        if (e.key === 'Escape') closeArticleModal();
+        if (e.key === 'Tab') {
+          const focusable = [...backdrop.querySelectorAll('button, a[href], iframe')];
+          const first = focusable[0], last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+
+      // Deep link: blog.html#post-3 opens that article directly.
+      const fromHash = decodeURIComponent(location.hash.slice(1));
+      if (fromHash && getAllArticles().some(a => a.id === fromHash)) openArticleModal(fromHash);
     });
 
     // Modal Functions
+    let lastFocused = null;
+
     function openArticleModal(articleId) {
       const all = getAllArticles();
       const article = all.find(a => a.id === articleId);
       if (!article) return;
+      lastFocused = document.activeElement;
 
       document.getElementById('modalCategory').textContent = article.category;
       document.getElementById('modalTitle').textContent = article.title;
-      document.getElementById('modalAvatar').textContent = article.avatar;
+      document.getElementById('modalAvatar').textContent = initialsFor(article);
       document.getElementById('modalAuthorName').textContent = `${article.author} (${article.authorRole || 'Contributor'})`;
       document.getElementById('modalMetaInfo').textContent = `${article.date} • ${article.readTime}`;
-      
+
       // Build main HTML body (including cover image and video player if present)
       let bodyHtml = '';
 
-      if (article.coverImage) {
-        bodyHtml += `<img src="${article.coverImage}" class="article-cover-hero" alt="${article.title}" />`;
+      const cover = safeImageUrl(article.coverImage);
+      if (cover) {
+        bodyHtml += `<img src="${esc(cover)}" class="article-cover-hero" alt="" />`;
       }
 
       if (article.videoUrl) {
@@ -712,14 +769,16 @@
           iframeSrc = `https://www.youtube.com/embed/${ytId}`;
         }
 
-        bodyHtml += `
-          <div class="video-responsive-container">
-            <iframe src="${iframeSrc}" allowfullscreen title="${article.title}"></iframe>
-          </div>
-        `;
+        if (/^https:\/\//i.test(iframeSrc)) {
+          bodyHtml += `
+            <div class="video-responsive-container">
+              <iframe src="${esc(iframeSrc)}" allowfullscreen loading="lazy" title="${esc(article.title)}"></iframe>
+            </div>
+          `;
+        }
       }
 
-      bodyHtml += article.content;
+      bodyHtml += article.content || '';
       document.getElementById('modalArticleContent').innerHTML = bodyHtml;
 
       const takeawaysBox = document.getElementById('modalKeyTakeaways');
@@ -739,32 +798,55 @@
 
       const backdrop = document.getElementById('articleModalBackdrop');
       backdrop.classList.add('open');
-      backdrop.setAttribute('aria-hidden', 'false');
+      backdrop.inert = false;
+      document.getElementById('articleModalContainer').scrollTop = 0;
       document.body.style.overflow = 'hidden';
+      history.replaceState(null, '', `#${encodeURIComponent(article.id)}`);
 
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-      }
+      if (window.refreshIcons) window.refreshIcons();
+      document.getElementById('closeModalBtn').focus();
     }
 
     function closeArticleModal() {
       const backdrop = document.getElementById('articleModalBackdrop');
+      if (!backdrop.classList.contains('open')) return;
       backdrop.classList.remove('open');
-      backdrop.setAttribute('aria-hidden', 'true');
+      backdrop.inert = true;
       document.body.style.overflow = '';
+      history.replaceState(null, '', location.pathname + location.search);
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
     }
 
-    // Share Functions
+    // Share Functions (links point at the open article via its #id)
     function copyArticleLink() {
-      navigator.clipboard.writeText(window.location.href);
-      alert('Article link copied to clipboard!');
+      const url = window.location.href;
+      const done = () => showShareToast('Article link copied to clipboard!');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(url).then(done, () => window.prompt('Copy this link:', url));
+      } else {
+        window.prompt('Copy this link:', url);
+      }
+    }
+    function showShareToast(message) {
+      let toast = document.getElementById('shareToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'shareToast';
+        toast.className = 'share-toast';
+        toast.setAttribute('role', 'status');
+        document.body.appendChild(toast);
+      }
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showShareToast.timer);
+      showShareToast.timer = setTimeout(() => toast.classList.remove('show'), 2500);
     }
     function shareWhatsApp() {
       const title = document.getElementById('modalTitle').textContent;
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' - Read at: ' + window.location.href)}`, '_blank');
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' - Read at: ' + window.location.href)}`, '_blank', 'noopener');
     }
     function shareLinkedIn() {
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank');
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank', 'noopener');
     }
   </script>
 </body>

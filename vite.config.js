@@ -20,8 +20,7 @@ export default defineConfig({
         partnership: resolve(__dirname, 'partnership.html'),
         blog: resolve(__dirname, 'blog.html'),
         blogeditor: resolve(__dirname, 'blogeditor.html'),
-        admin1: resolve(__dirname, 'admin1.html'),
-        blogAdmin1: resolve(__dirname, 'blog/admin1.html')
+        admin1: resolve(__dirname, 'admin1.html')
       }
     }
   }
