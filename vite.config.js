@@ -1,7 +1,18 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { cpSync } from 'fs';
+
+// src/main.js is a plain script (so pages also work without a build);
+// Vite leaves non-module scripts alone, so copy it into the output as-is.
+const copySiteScript = {
+  name: 'copy-site-script',
+  closeBundle() {
+    cpSync(resolve(__dirname, 'src/main.js'), resolve(__dirname, 'dist/src/main.js'));
+  }
+};
 
 export default defineConfig({
+  plugins: [copySiteScript],
   server: {
     port: 3000,
     open: false
