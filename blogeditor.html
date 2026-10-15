@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Publishing Studio & Admin Portal | Future Edge</title>
+  <meta name="description"
+    content="Authorized admin studio for creating, formatting, and publishing blog articles for Future Edge Digital Marketing." />
+  <meta name="theme-color" content="#FAF7F2" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container bar-inner">
+      <span class="bar-badge">Future Edge Admin Portal</span>
+      <p class="bar-text">Blog Content Publishing Studio & Media Manager</p>
+      <a href="blog.html" class="bar-link">View Public Blog &rarr;</a>
+    </div>
+  </div>
+
+  <!-- Site Header -->
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo" aria-label="Future Edge Home">
+        <div class="logo-mark">
+          <img src="/logo.png" alt="Future Edge Logo" width="36" height="36" style="border-radius: 8px;" />
+        </div>
+        <div class="logo-text">
+          <span class="brand-title">FUTURE EDGE</span>
+          <span class="brand-subtitle">DIGITAL MARKETING</span>
+        </div>
+      </a>
+
+      <nav class="primary-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+          <li class="nav-item"><a href="blog.html" class="nav-link">Blog Page</a></li>
+          <li class="nav-item"><a href="academy.html" class="nav-link">Academy</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="blog.html" class="btn btn-outline-gold">View Live Blog</a>
+      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- AUTHENTICATION SCREEN (Shown if not logged in) -->
+    <div class="editor-auth-wrapper" id="authScreen">
+      <div class="auth-card">
+        <div class="auth-lock-icon">
+          <i data-lucide="shield-check" style="width: 32px; height: 32px;"></i>
+        </div>
+        <h2>Admin Authentication</h2>
+        <p>Please enter your portal credentials to access the Blog Publishing Studio.</p>
+
+        <form id="loginForm">
+          <div class="auth-form-group">
+            <label for="adminUser">Username</label>
+            <input type="text" id="adminUser" required />
+          </div>
+
+          <div class="auth-form-group">
+            <label for="adminPass">Password</label>
+            <input type="password" id="adminPass" required />
+          </div>
+
+          <div id="loginError"
+            style="display: none; color: #DC2626; font-size: 0.88rem; font-weight: 700; margin-bottom: 16px;">
+            <i data-lucide="alert-circle" style="vertical-align: middle; width:16px;height:16px;"></i> Invalid username
+            or password. Please try again.
+          </div>
+
+          <button type="submit" class="btn btn-primary-gold shiny-btn"
+            style="width: 100%; padding: 14px; font-size: 1rem;">
+            Unlock Publishing Studio &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- BLOG EDITOR STUDIO (Shown when authenticated) -->
+    <section class="editor-portal-section" id="editorStudio" style="display: none;">
+      <div class="container">
+        <!-- Top Admin Header Strip -->
+        <div class="admin-header-strip">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span class="admin-badge"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Authenticated
+              Admin</span>
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Logged in as <strong>Vivek Sharma
+                (Admin)</strong></span>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <a href="blog.html" target="_blank" class="btn btn-outline-gold"
+              style="padding: 6px 16px; font-size: 0.85rem;">View Live Blog &nearr;</a>
+            <button class="btn" id="logoutBtn"
+              style="background: var(--bg-cream-alt); color: var(--text-dark); border: 1px solid rgba(26,50,93,0.15); padding: 6px 16px; font-size: 0.85rem;">Logout</button>
+          </div>
+        </div>
+
+        <div class="editor-grid-layout">
+          <!-- Editor Input Form -->
+          <div class="editor-form-card">
+            <h2><i data-lucide="pen-tool" style="color: var(--gold-amber);"></i> Create & Publish New Blog Article</h2>
+
+            <form id="createArticleForm">
+              <div class="editor-field">
+                <label for="postTitle">Article Title *</label>
+                <input type="text" id="postTitle"
+                  placeholder="e.g. 10 Proven Marketing Strategies for Uttar Pradesh Businesses in 2026" required />
+              </div>
+
+              <div class="form-row-2">
+                <div class="editor-field">
+                  <label for="postCategory">Category *</label>
+                  <select id="postCategory" required>
+                    <option value="AI & SEO">AI & SEO</option>
+                    <option value="Performance Marketing">Performance Marketing</option>
+                    <option value="E-Commerce">E-Commerce</option>
+                    <option value="Academy & Career">Academy & Career</option>
+                    <option value="Local Business">Local Business</option>
+                    <option value="Branding & Content">Branding & Content</option>
+                  </select>
+                </div>
+
+                <div class="editor-field">
+                  <label for="postReadTime">Estimated Read Time *</label>
+                  <input type="text" id="postReadTime" placeholder="e.g. 5 min read" value="5 min read" required />
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="editor-field">
+                  <label for="postAuthorName">Author Name *</label>
+                  <input type="text" id="postAuthorName" placeholder="e.g. Vivek Sharma" value="Vivek Sharma"
+                    required />
+                </div>
+
+                <div class="editor-field">
+                  <label for="postAuthorRole">Author Title / Role</label>
+                  <input type="text" id="postAuthorRole" placeholder="e.g. Digital Growth Lead"
+                    value="Founder & Growth Strategist" />
+                </div>
+              </div>
+
+              <!-- Media Attachment: Image -->
+              <div class="editor-field">
+                <label><i data-lucide="image" style="width: 16px; height: 16px; vertical-align: middle;"></i> Article
+                  Cover Image (Upload or URL)</label>
+                <div class="media-input-tabs">
+                  <button type="button" class="media-tab-btn active" id="tabImgUrl">Image URL</button>
+                  <button type="button" class="media-tab-btn" id="tabImgFile">Upload Image File</button>
+                </div>
+
+                <div id="imgUrlBox">
+                  <input type="url" id="postImgUrl" placeholder="https://images.unsplash.com/... or paste image URL" />
+                </div>
+
+                <div id="imgFileBox" style="display: none;">
+                  <input type="file" id="postImgFile" accept="image/*" />
+                </div>
+              </div>
+
+              <!-- Media Attachment: Video -->
+              <div class="editor-field">
+                <label><i data-lucide="video" style="width: 16px; height: 16px; vertical-align: middle;"></i> Video
+                  Embed (YouTube / Vimeo / MP4 URL)</label>
+                <input type="text" id="postVideoUrl"
+                  placeholder="e.g. https://www.youtube.com/embed/dQw4w9WgXcQ or https://example.com/video.mp4" />
+                <span style="font-size: 0.78rem; color: var(--text-muted);">Paste YouTube Embed URL or direct video link
+                  to render an interactive video player inside the article.</span>
+              </div>
+
+              <div class="editor-field">
+                <label for="postExcerpt">Short Excerpt / Summary *</label>
+                <textarea id="postExcerpt" rows="3"
+                  placeholder="Brief summary of the article that appears on the card preview..." required></textarea>
+              </div>
+
+              <!-- Key Takeaways -->
+              <div class="editor-field">
+                <label><i data-lucide="zap" style="width:16px;height:16px;color:var(--gold-amber);"></i> Key Takeaways
+                  (One per line)</label>
+                <textarea id="postTakeaways" rows="3"
+                  placeholder="Bullet 1: Strategic insight&#10;Bullet 2: Actionable tip&#10;Bullet 3: Measurable outcome"></textarea>
+              </div>
+
+              <!-- Main Article Content Body -->
+              <div class="editor-field">
+                <label for="postContent">Full Article Content (HTML / Formatted Text) *</label>
+                <textarea id="postContent" rows="10"
+                  placeholder="Write full article body. Use <h3>Headings</h3>, <p>Paragraphs</p>, and <ul><li>Bullets</li></ul> for rich formatting..."
+                  required></textarea>
+              </div>
+
+              <div style="display: flex; gap: 14px; margin-top: 28px;">
+                <button type="submit" class="btn btn-primary-gold shiny-btn" style="padding: 14px 28px;">
+                  <i data-lucide="send"></i> Submit Article for Admin Approval
+                </button>
+                <button type="button" class="btn" id="resetFormBtn"
+                  style="background: var(--bg-cream-alt); color: var(--text-dark);">
+                  Clear Form
+                </button>
+              </div>
+
+              <div id="publishSuccessMsg"
+                style="display: none; background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; padding: 14px 20px; border-radius: var(--radius-sm); font-weight: 700; margin-top: 20px;">
+                <i data-lucide="clock" style="vertical-align: middle; margin-right: 6px;"></i> Article Submitted Successfully! It is now pending approval from Super Admin Vivek before going live.
+              </div>
+            </form>
+          </div>
+
+          <!-- Live Preview Side Card -->
+          <div>
+            <div class="editor-preview-card">
+              <h3><i data-lucide="eye" style="color: #003087;"></i> Live Post Card Preview</h3>
+
+              <div class="blog-card" style="margin-top: 16px;">
+                <div class="blog-card-img" id="prevImgBox"
+                  style="background: linear-gradient(135deg, #0F2042 0%, #1A325D 100%); display: flex; align-items: flex-end; padding: 16px;">
+                  <span class="cat-tag" id="prevCategory"
+                    style="background: rgba(255,255,255,0.9); padding: 4px 10px; border-radius: var(--radius-full); z-index: 2;">AI
+                    & SEO</span>
+                </div>
+                <div class="blog-card-body">
+                  <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;" id="prevMeta">Just Now
+                    &bull; 5 min read</div>
+                  <h3 class="blog-card-title" id="prevTitle">Article Title Preview Will Appear Here...</h3>
+                  <p class="blog-card-excerpt" id="prevExcerpt">Your article short summary and excerpt will preview
+                    right here as you type.</p>
+                  <div class="blog-card-footer">
+                    <div class="author-info">
+                      <div class="author-avatar" id="prevAvatar" style="width: 32px; height: 32px; font-size: 0.8rem;">
+                        VS</div>
+                      <span class="author-name" id="prevAuthor" style="font-size: 0.85rem;">Vivek Sharma</span>
+                    </div>
+                    <span class="read-article-btn">Read Article &rarr;</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Media Preview Box -->
+              <div style="margin-top: 28px;">
+                <h4 style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 8px;">Attached Video Preview</h4>
+                <div id="videoPreviewArea"
+                  style="background: var(--bg-cream-alt); border-radius: var(--radius-md); padding: 20px; text-align: center; color: var(--text-muted); font-size: 0.88rem;">
+                  No video attached yet. Enter a YouTube or MP4 URL above to preview player.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Published Articles Manager -->
+        <div class="published-manager-card">
+          <h3
+            style="color: var(--text-dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <i data-lucide="layers" style="color: var(--gold-amber);"></i> Manage User-Published Articles
+          </h3>
+          <div id="publishedList">
+            <!-- Render custom user posts list -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; <span id="currentYear">2026</span> Future Edge Digital Marketing. All rights reserved.</p>
+      <p class="cachebugs-credit">Crafted by <a href="https://cachebugs.site/" target="_blank"
+          rel="noopener">Cachebugs</a></p>
+    </div>
+  </footer>
+
+  <!-- Embedded Portal JavaScript -->
+  <script>
+    // --- AUTHENTICATION LOGIC ---
+    const ADMIN_USER = 'future-edge';
+    const ADMIN_PASS = 'FTRedge0912';
+
+    function checkAuth() {
+      const isAuth = sessionStorage.getItem('future_edge_admin_auth') === 'true';
+      const authScreen = document.getElementById('authScreen');
+      const editorStudio = document.getElementById('editorStudio');
+
+      if (isAuth) {
+        authScreen.style.display = 'none';
+        editorStudio.style.display = 'block';
+        renderPublishedManager();
+      } else {
+        authScreen.style.display = 'flex';
+        editorStudio.style.display = 'none';
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = document.getElementById('adminUser').value.trim();
+      const p = document.getElementById('adminPass').value.trim();
+      const err = document.getElementById('loginError');
+
+      if (u === ADMIN_USER && p === ADMIN_PASS) {
+        err.style.display = 'none';
+        sessionStorage.setItem('future_edge_admin_auth', 'true');
+        checkAuth();
+      } else {
+        err.style.display = 'block';
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      sessionStorage.removeItem('future_edge_admin_auth');
+      checkAuth();
+    });
+
+    // --- MEDIA TAB TOGGLE & BASE64 UPLOADER ---
+    let currentImgData = '';
+
+    const tabUrl = document.getElementById('tabImgUrl');
+    const tabFile = document.getElementById('tabImgFile');
+    const boxUrl = document.getElementById('imgUrlBox');
+    const boxFile = document.getElementById('imgFileBox');
+
+    tabUrl.addEventListener('click', () => {
+      tabUrl.classList.add('active');
+      tabFile.classList.remove('active');
+      boxUrl.style.display = 'block';
+      boxFile.style.display = 'none';
+    });
+
+    tabFile.addEventListener('click', () => {
+      tabFile.classList.add('active');
+      tabUrl.classList.remove('active');
+      boxFile.style.display = 'block';
+      boxUrl.style.display = 'none';
+    });
+
+    document.getElementById('postImgFile').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (evt) {
+          currentImgData = evt.target.result;
+          updatePreview();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // --- LIVE PREVIEW BINDINGS ---
+    const titleIn = document.getElementById('postTitle');
+    const catIn = document.getElementById('postCategory');
+    const readIn = document.getElementById('postReadTime');
+    const authorIn = document.getElementById('postAuthorName');
+    const excerptIn = document.getElementById('postExcerpt');
+    const imgUrlIn = document.getElementById('postImgUrl');
+    const videoUrlIn = document.getElementById('postVideoUrl');
+
+    function updatePreview() {
+      document.getElementById('prevTitle').textContent = titleIn.value || 'Article Title Preview Will Appear Here...';
+      document.getElementById('prevCategory').textContent = catIn.value;
+      document.getElementById('prevExcerpt').textContent = excerptIn.value || 'Your article short summary and excerpt will preview right here as you type.';
+      document.getElementById('prevAuthor').textContent = authorIn.value || 'Vivek Sharma';
+      document.getElementById('prevMeta').textContent = `Just Now • ${readIn.value || '5 min read'}`;
+
+      // Initials avatar
+      const name = authorIn.value || 'Vivek Sharma';
+      const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+      document.getElementById('prevAvatar').textContent = initials || 'VS';
+
+      // Cover Image
+      const prevImgBox = document.getElementById('prevImgBox');
+      const url = imgUrlIn.value.trim() || currentImgData;
+      if (url) {
+        prevImgBox.style.backgroundImage = `linear-gradient(180deg, transparent 50%, rgba(26,50,93,0.4) 100%), url('${url}')`;
+        prevImgBox.style.backgroundSize = 'cover';
+      } else {
+        prevImgBox.style.backgroundImage = `linear-gradient(135deg, #0F2042 0%, #1A325D 100%)`;
+      }
+
+      // Video Preview
+      const vUrl = videoUrlIn.value.trim();
+      const vArea = document.getElementById('videoPreviewArea');
+      if (vUrl) {
+        let iframeSrc = vUrl;
+        if (vUrl.includes('youtube.com/watch?v=')) {
+          const ytId = vUrl.split('watch?v=')[1].split('&')[0];
+          iframeSrc = `https://www.youtube.com/embed/${ytId}`;
+        } else if (vUrl.includes('youtu.be/')) {
+          const ytId = vUrl.split('youtu.be/')[1].split('?')[0];
+          iframeSrc = `https://www.youtube.com/embed/${ytId}`;
+        }
+
+        vArea.innerHTML = `
+          <div class="video-responsive-container">
+            <iframe src="${iframeSrc}" allowfullscreen title="Video Preview"></iframe>
+          </div>
+        `;
+      } else {
+        vArea.innerHTML = 'No video attached yet. Enter a YouTube or MP4 URL above to preview player.';
+      }
+    }
+
+    [titleIn, catIn, readIn, authorIn, excerptIn, imgUrlIn, videoUrlIn].forEach(el => {
+      el.addEventListener('input', updatePreview);
+    });
+
+    // --- CREATE & PUBLISH ARTICLE ---
+    document.getElementById('createArticleForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const title = titleIn.value.trim();
+      const category = catIn.value;
+      const readTime = readIn.value.trim();
+      const author = authorIn.value.trim();
+      const authorRole = document.getElementById('postAuthorRole').value.trim();
+      const excerpt = excerptIn.value.trim();
+      const content = document.getElementById('postContent').value.trim();
+      const takeawaysRaw = document.getElementById('postTakeaways').value.trim();
+      const coverImage = imgUrlIn.value.trim() || currentImgData || '';
+      const videoUrl = videoUrlIn.value.trim() || '';
+
+      const takeaways = takeawaysRaw ? takeawaysRaw.split('\n').filter(t => t.trim() !== '') : [];
+
+      const initials = author.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+
+      const newArticle = {
+        id: 'pending-' + Date.now(),
+        title,
+        category,
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        readTime,
+        author,
+        authorRole,
+        avatar: initials,
+        coverImage,
+        videoUrl,
+        bgGradient: 'linear-gradient(135deg, #0F2042 0%, #1A325D 100%)',
+        excerpt,
+        takeaways,
+        content,
+        status: 'pending'
+      };
+
+      // Save to pending localStorage
+      const existing = JSON.parse(localStorage.getItem('future_edge_pending_blogs') || '[]');
+      existing.unshift(newArticle);
+      localStorage.setItem('future_edge_pending_blogs', JSON.stringify(existing));
+
+      // Show Pending Toast
+      document.getElementById('publishSuccessMsg').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('publishSuccessMsg').style.display = 'none';
+      }, 7000);
+
+      renderPublishedManager();
+    });
+
+    // Reset Form
+    document.getElementById('resetFormBtn').addEventListener('click', () => {
+      document.getElementById('createArticleForm').reset();
+      currentImgData = '';
+      updatePreview();
+    });
+
+    // --- PENDING & APPROVED SUBMISSIONS MANAGER ---
+    function renderPublishedManager() {
+      const container = document.getElementById('publishedList');
+      const pending = JSON.parse(localStorage.getItem('future_edge_pending_blogs') || '[]');
+      const approved = JSON.parse(localStorage.getItem('future_edge_approved_blogs') || '[]');
+      const allSubmissions = [...pending, ...approved];
+
+      if (allSubmissions.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No article submissions yet. Use the form above to submit an article for admin approval.</p>';
+        return;
+      }
+
+      container.innerHTML = '';
+      allSubmissions.forEach(post => {
+        const item = document.createElement('div');
+        item.className = 'published-list-item';
+        const isApproved = post.status === 'approved' || approved.some(a => a.id === post.id);
+        const statusBadge = isApproved ? 
+          '<span class="status-pill-live">Live Approved</span>' : 
+          '<span class="status-pill-pending">Pending Approval</span>';
+
+        item.innerHTML = `
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+              <span style="font-size: 0.78rem; color: #003087; font-weight: 700; text-transform: uppercase;">${post.category}</span>
+              ${statusBadge}
+            </div>
+            <h4 style="font-size: 1.05rem; color: var(--text-dark); margin: 2px 0;">${post.title}</h4>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Submitted: ${post.date} &bull; Author: ${post.author}</span>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            ${isApproved ? '<a href="blog.html" target="_blank" class="btn" style="background: var(--gold-pale); color: var(--text-dark); padding: 6px 12px; font-size: 0.8rem;">View on Blog &rarr;</a>' : '<span style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">Awaiting Vivek Approval</span>'}
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function deleteCustomPost(id) {
+      if (confirm('Are you sure you want to delete this published article?')) {
+        let posts = JSON.parse(localStorage.getItem('future_edge_custom_blogs') || '[]');
+        posts = posts.filter(p => p.id !== id);
+        localStorage.setItem('future_edge_custom_blogs', JSON.stringify(posts));
+        renderPublishedManager();
+      }
+    }
+
+    // Initialize on Load
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuth();
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+
+</html>
