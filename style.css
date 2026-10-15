@@ -64,7 +64,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   font-size: 16px;
 }
 
@@ -73,7 +72,6 @@ body {
   background-color: var(--bg-cream);
   color: var(--text-body);
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -172,7 +170,6 @@ ul {
 
 .btn-primary-gold {
   background: var(--gradient-gold);
-  color: #FFFFFF;
   box-shadow: var(--shadow-gold);
   border: 2px solid var(--text-dark);
 }
@@ -185,7 +182,6 @@ ul {
 .btn-outline-gold {
   background: transparent;
   color: var(--gold-primary);
-  border-color: var(--gold-primary);
 }
 
 .btn-outline-gold:hover {
@@ -432,8 +428,7 @@ ul {
 
 /* Hero Section Pinned 3D Stage */
 .hero-sequence {
-  position: relative;
-  height: 400vh; /* Multi-screen height for sequence scrolling */
+  position: relative; /* height is set in the UI/UX fix layer */
   background: radial-gradient(circle at 70% 30%, #FFFDF9 0%, var(--bg-cream) 70%);
 }
 
@@ -546,7 +541,6 @@ ul {
 .hero-copy-slides {
   position: relative;
   max-width: 660px;
-  min-height: 380px;
 }
 
 .hero-message {
@@ -619,7 +613,6 @@ ul {
   font-family: var(--font-heading);
   font-size: 2.8rem;
   font-weight: 800;
-  color: var(--gold-primary);
   line-height: 1;
   margin-bottom: 8px;
 }
@@ -964,10 +957,6 @@ ul {
 
 .form-group label {
   display: block;
-  font-family: var(--font-heading);
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: var(--text-dark);
   margin-bottom: 8px;
 }
 
@@ -1273,18 +1262,7 @@ ul {
 }
 
 .blog-card {
-  background: var(--bg-card);
-  border: 1px solid var(--gold-border);
-  border-radius: var(--radius-lg);
   padding: 32px 24px;
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-bounce);
-}
-
-.blog-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--gold-primary);
 }
 
 .blog-category {
@@ -1372,7 +1350,6 @@ ul {
   height: 12px;
   background: rgba(217, 119, 6, 0.25);
   border-radius: 50%;
-  cursor: pointer;
   transition: all var(--transition-fast);
 }
 
@@ -1457,14 +1434,12 @@ ul {
 }
 
 .cta-content h2 {
-  font-size: 2.8rem;
   color: #FFFFFF;
   margin-bottom: 16px;
 }
 
 .cta-content p {
   font-size: 1.2rem;
-  opacity: 0.95;
   margin-bottom: 24px;
 }
 
@@ -1482,94 +1457,12 @@ ul {
 }
 
 /* Site Footer */
-.site-footer {
-  background: #12100E;
-  color: #A8A29E;
-  padding: 80px 0 40px 0;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr repeat(4, 1fr);
-  gap: 40px;
-  margin-bottom: 60px;
-}
-
-.brand-col .brand-title {
-  color: #FFFFFF;
-}
-
-.brand-col p {
-  margin-top: 16px;
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-
-.footer-contact {
-  color: #E7E5E4;
-}
-
-.footer-col h4 {
-  font-size: 1rem;
-  color: #FFFFFF;
-  margin-bottom: 20px;
-}
-
-.footer-col ul li {
-  margin-bottom: 10px;
-}
-
-.footer-col ul li a {
-  font-size: 0.9rem;
-  color: #A8A29E;
-}
-
-.footer-col ul li a:hover {
-  color: var(--gold-light);
-}
 
 .footer-bottom {
-  padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
 }
 
 /* Quick Floating Buttons */
-.floating-contact {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.float-btn {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
-  box-shadow: var(--shadow-lg);
-  transition: transform var(--transition-bounce);
-}
-
-.float-phone {
-  background: var(--gradient-gold);
-}
-
-.float-wa {
-  background: #25D366;
-}
-
-.float-btn:hover {
-  transform: scale(1.15) rotate(8deg);
-}
 
 /* ==========================================================================
    3D SERVICES CARDS — Section
@@ -1861,7 +1754,6 @@ ul {
 .footer-col h4 { font-size: 0.95rem; color: #FFFFFF; margin-bottom: 16px; }
 .footer-col ul li { margin-bottom: 9px; }
 .footer-col ul li a { font-size: 0.87rem; color: #A8A29E; }
-.footer-col ul li a:hover { color: var(--gold-light); }
 
 .footer-bottom {
   padding-top: 24px;
@@ -2156,7 +2048,6 @@ ul {
 
 .mobile-nav-list li a:hover {
   background: var(--gold-pale);
-  color: var(--gold-primary);
 }
 
 .mobile-nav-ctas {
@@ -2325,7 +2216,6 @@ ul {
 
 @media (max-width: 767px) {
   .form-grid {
-    grid-template-columns: 1fr;
     gap: 16px;
   }
   .form-container {
@@ -2360,7 +2250,6 @@ ul {
 }
 
 .form-modal-container {
-  background: #fff;
   width: 100%;
   max-width: 800px;
   max-height: 90vh;
@@ -3325,9 +3214,6 @@ h1, h2, h3, h4, h5, h6, p {
   }
   .article-cover-hero {
     height: 200px;
-  }
-  .newsletter-form-inline {
-    flex-direction: column;
   }
   .newsletter-form-inline button {
     width: 100%;
@@ -4539,7 +4425,7 @@ h1.page-title {
 }
 
 @media (max-width: 767px) {
-  .hero-static .hero-sticky { padding: 40px 0 48px; min-height: 0; }
+  .hero-static .hero-sticky { padding: 40px 0 48px; }
   .hero-copy-slides .hero-title { font-size: 1.85rem !important; line-height: 1.25 !important; }
 }
 

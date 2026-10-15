@@ -1,0 +1,4 @@
+# Only blog.php and setup.php are meant to be requested directly.
+<Files "lib.php">
+  Require all denied
+</Files>

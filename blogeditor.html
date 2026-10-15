@@ -4,15 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog Publishing Studio & Admin Portal | Future Edge</title>
-  <meta name="description"
-    content="Authorized admin studio for creating, formatting, and publishing blog articles for Future Edge Digital Marketing." />
+  <title>Blog Editor | Future Edge</title>
+  <meta name="description" content="Editor portal for writing Future Edge blog articles." />
+  <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#FAF7F2" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -98,24 +100,23 @@
         <div class="auth-lock-icon">
           <i data-lucide="shield-check" style="width: 32px; height: 32px;"></i>
         </div>
-        <h2>Admin Authentication</h2>
-        <p>Please enter your portal credentials to access the Blog Publishing Studio.</p>
+        <h2>Editor Login</h2>
+        <p>Log in with your editor or admin account to write articles for approval.</p>
 
         <form id="loginForm">
           <div class="auth-form-group">
             <label for="adminUser">Username</label>
-            <input type="text" id="adminUser" required />
+            <input type="text" id="adminUser" autocomplete="username" required />
           </div>
 
           <div class="auth-form-group">
             <label for="adminPass">Password</label>
-            <input type="password" id="adminPass" required />
+            <input type="password" id="adminPass" autocomplete="current-password" required />
           </div>
 
-          <div id="loginError"
+          <div id="loginError" role="alert"
             style="display: none; color: #DC2626; font-size: 0.88rem; font-weight: 700; margin-bottom: 16px;">
-            <i data-lucide="alert-circle" style="vertical-align: middle; width:16px;height:16px;"></i> Invalid username
-            or password. Please try again.
+            <i data-lucide="alert-circle" style="vertical-align: middle; width:16px;height:16px;"></i> <span id="loginErrorText">Invalid username or password.</span>
           </div>
 
           <button type="submit" class="btn btn-primary-gold shiny-btn"
@@ -132,15 +133,13 @@
         <!-- Top Admin Header Strip -->
         <div class="admin-header-strip">
           <div style="display: flex; align-items: center; gap: 14px;">
-            <span class="admin-badge"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Authenticated
-              Admin</span>
-            <span style="color: var(--text-muted); font-size: 0.9rem;">Logged in as <strong>Vivek Sharma
-                (Admin)</strong></span>
+            <span class="admin-badge"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Signed In</span>
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Logged in as <strong id="editorName">Editor</strong></span>
           </div>
           <div style="display: flex; gap: 10px;">
             <a href="blog.html" target="_blank" class="btn btn-outline-gold"
               style="padding: 6px 16px; font-size: 0.85rem;">View Live Blog &nearr;</a>
-            <button class="btn" id="logoutBtn"
+            <button class="btn" id="logoutBtn" type="button"
               style="background: var(--bg-cream-alt); color: var(--text-dark); border: 1px solid rgba(26,50,93,0.15); padding: 6px 16px; font-size: 0.85rem;">Logout</button>
           </div>
         </div>
@@ -179,7 +178,7 @@
               <div class="form-row-2">
                 <div class="editor-field">
                   <label for="postAuthorName">Author Name *</label>
-                  <input type="text" id="postAuthorName" placeholder="e.g. Vivek Sharma" value="Vivek Sharma"
+                  <input type="text" id="postAuthorName" placeholder="e.g. Vivek Singh Bhadauriya" value="Vivek Singh Bhadauriya"
                     required />
                 </div>
 
@@ -252,7 +251,7 @@
 
               <div id="publishSuccessMsg"
                 style="display: none; background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; padding: 14px 20px; border-radius: var(--radius-sm); font-weight: 700; margin-top: 20px;">
-                <i data-lucide="clock" style="vertical-align: middle; margin-right: 6px;"></i> Article Submitted Successfully! It is now pending approval from Super Admin Vivek before going live.
+                <i data-lucide="clock" style="vertical-align: middle; margin-right: 6px;"></i> Article submitted! It will go live on the blog once an admin approves it.
               </div>
             </form>
           </div>
@@ -279,7 +278,7 @@
                     <div class="author-info">
                       <div class="author-avatar" id="prevAvatar" style="width: 32px; height: 32px; font-size: 0.8rem;">
                         VS</div>
-                      <span class="author-name" id="prevAuthor" style="font-size: 0.85rem;">Vivek Sharma</span>
+                      <span class="author-name" id="prevAuthor" style="font-size: 0.85rem;">Vivek Singh Bhadauriya</span>
                     </div>
                     <span class="read-article-btn">Read Article &rarr;</span>
                   </div>
@@ -346,44 +345,63 @@
   <script src="src/main.js" defer></script>
 
   <!-- Embedded Portal JavaScript -->
+  <script src="src/admin-api.js"></script>
   <script>
-    // --- AUTHENTICATION LOGIC ---
-    const ADMIN_USER = 'future-edge';
-    const ADMIN_PASS = 'FTRedge0912';
+    // --- AUTHENTICATION (server-side, api/blog.php) ---
+    const { esc } = window.FEApi;
 
-    function checkAuth() {
-      const isAuth = sessionStorage.getItem('future_edge_admin_auth') === 'true';
-      const authScreen = document.getElementById('authScreen');
-      const editorStudio = document.getElementById('editorStudio');
+    function showStudio(user) {
+      document.getElementById('editorName').textContent = `${user.name || user.username} (${user.role === 'admin' ? 'Admin' : 'Editor'})`;
+      document.getElementById('authScreen').style.display = 'none';
+      document.getElementById('editorStudio').style.display = 'block';
+      renderPublishedManager();
+    }
 
-      if (isAuth) {
-        authScreen.style.display = 'none';
-        editorStudio.style.display = 'block';
-        renderPublishedManager();
-      } else {
-        authScreen.style.display = 'flex';
-        editorStudio.style.display = 'none';
+    function showLogin(message) {
+      document.getElementById('authScreen').style.display = 'flex';
+      document.getElementById('editorStudio').style.display = 'none';
+      if (message) showLoginError(message);
+    }
+
+    function showLoginError(message) {
+      document.getElementById('loginErrorText').textContent = message;
+      document.getElementById('loginError').style.display = 'block';
+    }
+
+    async function checkAuth() {
+      try {
+        const me = await FEApi.get('me');
+        if (!me.configured) return showLogin('Accounts are not set up yet. Open api/setup.php on the live site first.');
+        if (me.user) return showStudio(me.user);
+        showLogin();
+      } catch (err) {
+        showLogin(err.message);
       }
     }
 
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const u = document.getElementById('adminUser').value.trim();
-      const p = document.getElementById('adminPass').value.trim();
-      const err = document.getElementById('loginError');
-
-      if (u === ADMIN_USER && p === ADMIN_PASS) {
-        err.style.display = 'none';
-        sessionStorage.setItem('future_edge_admin_auth', 'true');
-        checkAuth();
-      } else {
-        err.style.display = 'block';
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.disabled = true;
+      document.getElementById('loginError').style.display = 'none';
+      try {
+        const res = await FEApi.post('login', {
+          username: document.getElementById('adminUser').value.trim(),
+          password: document.getElementById('adminPass').value,
+          portal: 'editor'
+        });
+        document.getElementById('adminPass').value = '';
+        showStudio(res.user);
+      } catch (err) {
+        showLoginError(err.message);
+      } finally {
+        btn.disabled = false;
       }
     });
 
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      sessionStorage.removeItem('future_edge_admin_auth');
-      checkAuth();
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      try { await FEApi.post('logout'); } catch (e) { /* already logged out */ }
+      showLogin();
     });
 
     // --- MEDIA TAB TOGGLE & BASE64 UPLOADER ---
@@ -410,6 +428,11 @@
 
     document.getElementById('postImgFile').addEventListener('change', (e) => {
       const file = e.target.files[0];
+      if (file && file.size > 2 * 1024 * 1024) {
+        alert('Please choose an image under 2 MB.');
+        e.target.value = '';
+        return;
+      }
       if (file) {
         const reader = new FileReader();
         reader.onload = function (evt) {
@@ -433,11 +456,11 @@
       document.getElementById('prevTitle').textContent = titleIn.value || 'Article Title Preview Will Appear Here...';
       document.getElementById('prevCategory').textContent = catIn.value;
       document.getElementById('prevExcerpt').textContent = excerptIn.value || 'Your article short summary and excerpt will preview right here as you type.';
-      document.getElementById('prevAuthor').textContent = authorIn.value || 'Vivek Sharma';
+      document.getElementById('prevAuthor').textContent = authorIn.value || 'Vivek Singh Bhadauriya';
       document.getElementById('prevMeta').textContent = `Just Now • ${readIn.value || '5 min read'}`;
 
       // Initials avatar
-      const name = authorIn.value || 'Vivek Sharma';
+      const name = authorIn.value || 'Vivek Singh Bhadauriya';
       const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
       document.getElementById('prevAvatar').textContent = initials || 'VS';
 
@@ -445,7 +468,7 @@
       const prevImgBox = document.getElementById('prevImgBox');
       const url = imgUrlIn.value.trim() || currentImgData;
       if (url) {
-        prevImgBox.style.backgroundImage = `linear-gradient(180deg, transparent 50%, rgba(26,50,93,0.4) 100%), url('${url}')`;
+        prevImgBox.style.backgroundImage = `linear-gradient(180deg, transparent 50%, rgba(26,50,93,0.4) 100%), url("${encodeURI(url).replace(/"/g, '%22')}")`;
         prevImgBox.style.backgroundSize = 'cover';
       } else {
         prevImgBox.style.backgroundImage = `linear-gradient(135deg, #0F2042 0%, #1A325D 100%)`;
@@ -454,7 +477,7 @@
       // Video Preview
       const vUrl = videoUrlIn.value.trim();
       const vArea = document.getElementById('videoPreviewArea');
-      if (vUrl) {
+      if (vUrl && /^https:\/\//i.test(vUrl)) {
         let iframeSrc = vUrl;
         if (vUrl.includes('youtube.com/watch?v=')) {
           const ytId = vUrl.split('watch?v=')[1].split('&')[0];
@@ -466,11 +489,11 @@
 
         vArea.innerHTML = `
           <div class="video-responsive-container">
-            <iframe src="${iframeSrc}" allowfullscreen title="Video Preview"></iframe>
+            <iframe src="${esc(iframeSrc)}" allowfullscreen title="Video Preview"></iframe>
           </div>
         `;
       } else {
-        vArea.innerHTML = 'No video attached yet. Enter a YouTube or MP4 URL above to preview player.';
+        vArea.textContent = vUrl ? 'Video links must start with https://' : 'No video attached yet. Enter a YouTube or MP4 URL above to preview player.';
       }
     }
 
@@ -478,55 +501,37 @@
       el.addEventListener('input', updatePreview);
     });
 
-    // --- CREATE & PUBLISH ARTICLE ---
-    document.getElementById('createArticleForm').addEventListener('submit', (e) => {
+    // --- SUBMIT ARTICLE FOR APPROVAL ---
+    document.getElementById('createArticleForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      const title = titleIn.value.trim();
-      const category = catIn.value;
-      const readTime = readIn.value.trim();
-      const author = authorIn.value.trim();
-      const authorRole = document.getElementById('postAuthorRole').value.trim();
-      const excerpt = excerptIn.value.trim();
-      const content = document.getElementById('postContent').value.trim();
-      const takeawaysRaw = document.getElementById('postTakeaways').value.trim();
-      const coverImage = imgUrlIn.value.trim() || currentImgData || '';
-      const videoUrl = videoUrlIn.value.trim() || '';
-
-      const takeaways = takeawaysRaw ? takeawaysRaw.split('\n').filter(t => t.trim() !== '') : [];
-
-      const initials = author.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
-
-      const newArticle = {
-        id: 'pending-' + Date.now(),
-        title,
-        category,
-        date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
-        readTime,
-        author,
-        authorRole,
-        avatar: initials,
-        coverImage,
-        videoUrl,
-        bgGradient: 'linear-gradient(135deg, #0F2042 0%, #1A325D 100%)',
-        excerpt,
-        takeaways,
-        content,
-        status: 'pending'
-      };
-
-      // Save to pending localStorage
-      const existing = JSON.parse(localStorage.getItem('future_edge_pending_blogs') || '[]');
-      existing.unshift(newArticle);
-      localStorage.setItem('future_edge_pending_blogs', JSON.stringify(existing));
-
-      // Show Pending Toast
-      document.getElementById('publishSuccessMsg').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('publishSuccessMsg').style.display = 'none';
-      }, 7000);
-
-      renderPublishedManager();
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.disabled = true;
+      try {
+        await FEApi.post('submit', {
+          title: titleIn.value.trim(),
+          category: catIn.value,
+          readTime: readIn.value.trim(),
+          author: authorIn.value.trim(),
+          authorRole: document.getElementById('postAuthorRole').value.trim(),
+          excerpt: excerptIn.value.trim(),
+          content: document.getElementById('postContent').value.trim(),
+          takeaways: document.getElementById('postTakeaways').value.split('\n').map(t => t.trim()).filter(Boolean),
+          coverImage: imgUrlIn.value.trim() || currentImgData || '',
+          videoUrl: videoUrlIn.value.trim()
+        });
+        const msg = document.getElementById('publishSuccessMsg');
+        msg.style.display = 'block';
+        setTimeout(() => { msg.style.display = 'none'; }, 7000);
+        document.getElementById('createArticleForm').reset();
+        currentImgData = '';
+        updatePreview();
+        renderPublishedManager();
+      } catch (err) {
+        if (err.status === 401) return showLogin('Your session expired. Please log in again.');
+        alert(err.message);
+      } finally {
+        btn.disabled = false;
+      }
     });
 
     // Reset Form
@@ -536,58 +541,47 @@
       updatePreview();
     });
 
-    // --- PENDING & APPROVED SUBMISSIONS MANAGER ---
-    function renderPublishedManager() {
+    // --- PENDING & APPROVED SUBMISSIONS ---
+    async function renderPublishedManager() {
       const container = document.getElementById('publishedList');
-      const pending = JSON.parse(localStorage.getItem('future_edge_pending_blogs') || '[]');
-      const approved = JSON.parse(localStorage.getItem('future_edge_approved_blogs') || '[]');
-      const allSubmissions = [...pending, ...approved];
-
-      if (allSubmissions.length === 0) {
+      let data;
+      try {
+        data = await FEApi.get('submissions');
+      } catch (err) {
+        if (err.status === 401) return showLogin('Your session expired. Please log in again.');
+        container.innerHTML = `<p style="color:#DC2626;">${esc(err.message)}</p>`;
+        return;
+      }
+      const all = [...data.pending, ...data.approved];
+      if (!all.length) {
         container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No article submissions yet. Use the form above to submit an article for admin approval.</p>';
         return;
       }
-
       container.innerHTML = '';
-      allSubmissions.forEach(post => {
+      all.forEach(post => {
+        const isApproved = post.status === 'approved';
         const item = document.createElement('div');
         item.className = 'published-list-item';
-        const isApproved = post.status === 'approved' || approved.some(a => a.id === post.id);
-        const statusBadge = isApproved ? 
-          '<span class="status-pill-live">Live Approved</span>' : 
-          '<span class="status-pill-pending">Pending Approval</span>';
-
         item.innerHTML = `
           <div>
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-              <span style="font-size: 0.78rem; color: #003087; font-weight: 700; text-transform: uppercase;">${post.category}</span>
-              ${statusBadge}
+              <span style="font-size: 0.78rem; color: #003087; font-weight: 700; text-transform: uppercase;">${esc(post.category)}</span>
+              ${isApproved ? '<span class="status-pill-live">Live Approved</span>' : '<span class="status-pill-pending">Pending Approval</span>'}
             </div>
-            <h4 style="font-size: 1.05rem; color: var(--text-dark); margin: 2px 0;">${post.title}</h4>
-            <span style="font-size: 0.8rem; color: var(--text-muted);">Submitted: ${post.date} &bull; Author: ${post.author}</span>
+            <h4 style="font-size: 1.05rem; color: var(--text-dark); margin: 2px 0;">${esc(post.title)}</h4>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Submitted: ${esc(post.date)} &bull; Author: ${esc(post.author)}</span>
           </div>
           <div style="display: flex; gap: 10px; align-items: center;">
-            ${isApproved ? '<a href="blog.html" target="_blank" class="btn" style="background: var(--gold-pale); color: var(--text-dark); padding: 6px 12px; font-size: 0.8rem;">View on Blog &rarr;</a>' : '<span style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">Awaiting Vivek Approval</span>'}
-          </div>
-        `;
+            ${isApproved
+              ? `<a href="blog.html#${encodeURIComponent(post.id)}" target="_blank" rel="noopener" class="btn" style="background: var(--gold-pale); color: var(--text-dark); padding: 6px 12px; font-size: 0.8rem;">View on Blog &rarr;</a>`
+              : '<span style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">Awaiting admin approval</span>'}
+          </div>`;
         container.appendChild(item);
       });
     }
 
-    function deleteCustomPost(id) {
-      if (confirm('Are you sure you want to delete this published article?')) {
-        let posts = JSON.parse(localStorage.getItem('future_edge_custom_blogs') || '[]');
-        posts = posts.filter(p => p.id !== id);
-        localStorage.setItem('future_edge_custom_blogs', JSON.stringify(posts));
-        renderPublishedManager();
-      }
-    }
-
     // Initialize on Load
-    document.addEventListener('DOMContentLoaded', () => {
-      checkAuth();
-      if (window.refreshIcons) window.refreshIcons();
-    });
+    document.addEventListener('DOMContentLoaded', checkAuth);
   </script>
 </body>
 

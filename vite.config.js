@@ -2,24 +2,24 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { cpSync } from 'fs';
 
-// src/main.js is a plain script (so pages also work without a build);
-// Vite leaves non-module scripts alone, so copy it into the output as-is.
-const copySiteScript = {
-  name: 'copy-site-script',
+// The scripts in src/ are plain (non-module) scripts so pages also work
+// without a build; Vite leaves those alone, so copy them into the output as-is.
+const copySiteScripts = {
+  name: 'copy-site-scripts',
   closeBundle() {
-    cpSync(resolve(__dirname, 'src/main.js'), resolve(__dirname, 'dist/src/main.js'));
+    cpSync(resolve(__dirname, 'src'), resolve(__dirname, 'dist/src'), { recursive: true });
   }
 };
 
 export default defineConfig({
-  plugins: [copySiteScript],
+  plugins: [copySiteScripts],
   server: {
     port: 3000,
     open: false
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),

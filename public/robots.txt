@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin1.html
+Disallow: /blogeditor.html
+Disallow: /api/
+
+Sitemap: https://futureedgedigitalmarketing.com/sitemap.xml

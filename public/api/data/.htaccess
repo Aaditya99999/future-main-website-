@@ -1,0 +1,2 @@
+# Blog data: never served over the web (files are also guarded with <?php exit; ?>).
+Require all denied

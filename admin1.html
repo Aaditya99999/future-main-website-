@@ -4,14 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Moderation Portal | Future Edge</title>
-  <meta name="description" content="Admin Portal for Vivek Sharma to review, approve, edit, and moderate blog posts for Future Edge." />
+  <title>Blog Admin Portal | Future Edge</title>
+  <meta name="description" content="Admin portal for reviewing and publishing Future Edge blog articles." />
+  <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#FAF7F2" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -98,21 +101,21 @@
           <i data-lucide="shield-check" style="width: 34px; height: 34px; color: #003087;"></i>
         </div>
         <h2>Admin Portal</h2>
-        <p>Log in with Admin Vivek credentials to review, approve, edit, or delete blog submissions.</p>
+        <p>Log in with your admin account to review, approve, edit, or delete blog submissions.</p>
 
         <form id="superLoginForm">
           <div class="auth-form-group">
             <label for="superUser">Admin Username</label>
-            <input type="text" id="superUser" placeholder="Enter Admin Username" required />
+            <input type="text" id="superUser" placeholder="Enter Admin Username" autocomplete="username" required />
           </div>
 
           <div class="auth-form-group">
             <label for="superPass">Password</label>
-            <input type="password" id="superPass" placeholder="Enter Password" required />
+            <input type="password" id="superPass" placeholder="Enter Password" autocomplete="current-password" required />
           </div>
 
-          <div id="superLoginError" style="display: none; color: #DC2626; font-size: 0.88rem; font-weight: 700; margin-bottom: 16px;">
-            <i data-lucide="alert-circle" style="vertical-align: middle; width:16px;height:16px;"></i> Invalid Admin Username or Password.
+          <div id="superLoginError" role="alert" style="display: none; color: #DC2626; font-size: 0.88rem; font-weight: 700; margin-bottom: 16px;">
+            <i data-lucide="alert-circle" style="vertical-align: middle; width:16px;height:16px;"></i> <span id="superLoginErrorText">Invalid username or password.</span>
           </div>
 
           <button type="submit" class="btn btn-primary-gold shiny-btn" style="width: 100%; padding: 14px; font-size: 1rem;">
@@ -128,21 +131,21 @@
         <!-- Top Strip -->
         <div class="admin-header-strip">
           <div style="display: flex; align-items: center; gap: 14px;">
-            <span class="super-admin-badge"><i data-lucide="shield-check" style="width:16px;height:16px;"></i> Vivek Sharma (Admin)</span>
+            <span class="super-admin-badge"><i data-lucide="shield-check" style="width:16px;height:16px;"></i> <span id="adminName">Admin</span> (Admin)</span>
             <span style="color: var(--text-muted); font-size: 0.9rem;">Full Content Moderation Rights Enabled</span>
           </div>
           <div style="display: flex; gap: 10px;">
             <a href="blog.html" target="_blank" class="btn btn-outline-gold" style="padding: 6px 16px; font-size: 0.85rem;">View Live Blog &nearr;</a>
-            <button class="btn" id="superLogoutBtn" style="background: var(--bg-cream-alt); color: var(--text-dark); border: 1px solid rgba(26,50,93,0.15); padding: 6px 16px; font-size: 0.85rem;">Logout</button>
+            <button class="btn" id="superLogoutBtn" type="button" style="background: var(--bg-cream-alt); color: var(--text-dark); border: 1px solid rgba(26,50,93,0.15); padding: 6px 16px; font-size: 0.85rem;">Logout</button>
           </div>
         </div>
 
         <!-- Dashboard Navigation Tabs -->
         <div class="category-tabs" style="justify-content: start; margin-bottom: 24px;">
-          <button class="cat-btn active" id="tabPending" onclick="switchTab('pending')">
+          <button class="cat-btn active" id="tabPending" type="button" onclick="switchTab('pending')">
             <i data-lucide="clock" style="width:16px;height:16px;vertical-align:middle;"></i> Pending Approvals (<span id="pendingCount">0</span>)
           </button>
-          <button class="cat-btn" id="tabApproved" onclick="switchTab('approved')">
+          <button class="cat-btn" id="tabApproved" type="button" onclick="switchTab('approved')">
             <i data-lucide="check-circle" style="width:16px;height:16px;vertical-align:middle;"></i> Live Approved Articles (<span id="approvedCount">0</span>)
           </button>
         </div>
@@ -150,7 +153,7 @@
         <!-- Pending Submissions Container -->
         <div class="published-manager-card" id="pendingSection">
           <h3 style="color: var(--text-dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-            <i data-lucide="inbox" style="color: var(--gold-amber);"></i> Articles Waiting for Vivek's Approval
+            <i data-lucide="inbox" style="color: var(--gold-amber);"></i> Articles Waiting for Approval
           </h3>
           <div id="pendingContainer">
             <!-- Render pending items -->
@@ -160,7 +163,7 @@
         <!-- Live Approved Submissions Container -->
         <div class="published-manager-card" id="approvedSection" style="display: none;">
           <h3 style="color: var(--text-dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-            <i data-lucide="globe" style="color: #003087;"></i> Live Approved Custom Articles
+            <i data-lucide="globe" style="color: #003087;"></i> Live Articles on the Blog
           </h3>
           <div id="approvedContainer">
             <!-- Render approved items -->
@@ -248,7 +251,7 @@
 
           <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
             <button type="button" class="btn" id="cancelEditBtn" style="background: var(--bg-cream-alt); color: var(--text-dark);">Cancel</button>
-            <button type="submit" class="btn btn-primary-gold shiny-btn">Save Changes & Approve Article &rarr;</button>
+            <button type="submit" class="btn btn-primary-gold shiny-btn" id="saveEditBtn">Save Changes &rarr;</button>
           </div>
         </form>
       </div>
@@ -287,370 +290,278 @@
 
   <script src="src/main.js" defer></script>
 
+  <script src="src/default-posts.js"></script>
+  <script src="src/admin-api.js"></script>
   <script>
-    // SUPER ADMIN CREDENTIALS
-    const SUPER_USER = 'vivekFE';
-    const SUPER_PASS = 'vivek87654321';
+    // Admin portal: all reads and writes go through the server (api/blog.php).
+    const { esc } = window.FEApi;
+    const defaultArticles = window.FE_DEFAULT_POSTS || [];
+    let state = { pending: [], approved: [], deletedDefaultIds: [], editedDefaults: {} };
 
-    // Built-in Default Articles Data
-    const defaultArticlesData = [
-      { id: 'post-1', title: 'The Future of AI-Powered SEO in 2026: How UP Businesses Can Dominate Local Search', category: 'AI & SEO', date: 'Aug 24, 2026', author: 'Vivek Sharma', authorRole: 'Founder & Growth Strategist', isDefault: true },
-      { id: 'post-2', title: 'Meta Ads vs. Google Ads for Indian SMBs: Which Offers Better ROI in 2026?', category: 'Performance Marketing', date: 'Aug 18, 2026', author: 'Priya Verma', authorRole: 'Senior Performance Lead', isDefault: true },
-      { id: 'post-3', title: 'Building a High-Converting D2C E-Commerce Brand in India', category: 'E-Commerce', date: 'Aug 12, 2026', author: 'Amit Patel', authorRole: 'E-Commerce Strategist', isDefault: true },
-      { id: 'post-4', title: 'How to Launch a Career in Digital Marketing & AI in 2026', category: 'Academy & Career', date: 'Aug 05, 2026', author: 'Neha Gupta', authorRole: 'Academy Director', isDefault: true },
-      { id: 'post-5', title: 'Local Business Growth: Scaling a Clinic or Retail Store with WhatsApp Marketing', category: 'Local Business', date: 'Jul 29, 2026', author: 'Vivek Sharma', authorRole: 'Founder', isDefault: true },
-      { id: 'post-6', title: 'Short-Form Video Strategy: How to Build a Brand on Instagram Reels', category: 'Branding & Content', date: 'Jul 20, 2026', author: 'Rohan Singh', authorRole: 'Creative Lead', isDefault: true }
-    ];
+    // --- Auth -----------------------------------------------------------------
+    function showDashboard(user) {
+      document.getElementById('adminName').textContent = user.name || user.username;
+      document.getElementById('superAuthScreen').style.display = 'none';
+      document.getElementById('superDashboard').style.display = 'block';
+      loadData();
+    }
 
-    function checkSuperAuth() {
-      const isAuth = sessionStorage.getItem('future_edge_super_admin_auth') === 'true';
-      const authScreen = document.getElementById('superAuthScreen');
-      const dashboard = document.getElementById('superDashboard');
+    function showLogin(message) {
+      document.getElementById('superAuthScreen').style.display = 'flex';
+      document.getElementById('superDashboard').style.display = 'none';
+      if (message) showLoginError(message);
+    }
 
-      if (isAuth) {
-        authScreen.style.display = 'none';
-        dashboard.style.display = 'block';
-        renderSuperLists();
-      } else {
-        authScreen.style.display = 'flex';
-        dashboard.style.display = 'none';
+    function showLoginError(message) {
+      document.getElementById('superLoginErrorText').textContent = message;
+      document.getElementById('superLoginError').style.display = 'block';
+    }
+
+    async function checkSuperAuth() {
+      try {
+        const me = await FEApi.get('me');
+        if (!me.configured) return showLogin('Admin accounts are not set up yet. Open api/setup.php on the live site first.');
+        if (me.user && me.user.role === 'admin') return showDashboard(me.user);
+        showLogin();
+      } catch (err) {
+        showLogin(err.message);
       }
     }
 
-    document.getElementById('superLoginForm').addEventListener('submit', (e) => {
+    document.getElementById('superLoginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const u = document.getElementById('superUser').value.trim();
-      const p = document.getElementById('superPass').value.trim();
-      const err = document.getElementById('superLoginError');
-
-      if (u === SUPER_USER && p === SUPER_PASS) {
-        err.style.display = 'none';
-        sessionStorage.setItem('future_edge_super_admin_auth', 'true');
-        checkSuperAuth();
-      } else {
-        err.style.display = 'block';
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.disabled = true;
+      document.getElementById('superLoginError').style.display = 'none';
+      try {
+        const res = await FEApi.post('login', {
+          username: document.getElementById('superUser').value.trim(),
+          password: document.getElementById('superPass').value,
+          portal: 'admin'
+        });
+        document.getElementById('superPass').value = '';
+        showDashboard(res.user);
+      } catch (err) {
+        showLoginError(err.message);
+      } finally {
+        btn.disabled = false;
       }
     });
 
-    document.getElementById('superLogoutBtn').addEventListener('click', () => {
-      sessionStorage.removeItem('future_edge_super_admin_auth');
-      checkSuperAuth();
+    document.getElementById('superLogoutBtn').addEventListener('click', async () => {
+      try { await FEApi.post('logout'); } catch (e) { /* already logged out */ }
+      showLogin();
     });
 
-    // Tab Switching
-    function switchTab(tab) {
-      const pendingSec = document.getElementById('pendingSection');
-      const approvedSec = document.getElementById('approvedSection');
-      const tabPend = document.getElementById('tabPending');
-      const tabAppr = document.getElementById('tabApproved');
-
-      if (tab === 'pending') {
-        pendingSec.style.display = 'block';
-        approvedSec.style.display = 'none';
-        tabPend.classList.add('active');
-        tabAppr.classList.remove('active');
-      } else {
-        pendingSec.style.display = 'none';
-        approvedSec.style.display = 'block';
-        tabAppr.classList.add('active');
-        tabPend.classList.remove('active');
+    // Run an admin action; on session expiry go back to the login screen.
+    async function act(action, body, successMessage) {
+      try {
+        await FEApi.post(action, body);
+        if (successMessage) alert(successMessage);
+        await loadData();
+        return true;
+      } catch (err) {
+        if (err.status === 401) return showLogin('Your session expired. Please log in again.'), false;
+        alert(err.message);
+        return false;
       }
     }
 
-    // Render Lists
-    function renderSuperLists() {
-      const pending = JSON.parse(localStorage.getItem('future_edge_pending_blogs') || '[]');
-      const approved = JSON.parse(localStorage.getItem('future_edge_approved_blogs') || '[]');
-      const legacy = JSON.parse(localStorage.getItem('future_edge_custom_blogs') || '[]');
-      const deletedDefaultIds = JSON.parse(localStorage.getItem('future_edge_deleted_default_ids') || '[]');
-      const editedDefaults = JSON.parse(localStorage.getItem('future_edge_edited_default_blogs') || '{}');
-
-      // Active Default Articles
-      const activeDefaults = defaultArticlesData
-        .filter(art => !deletedDefaultIds.includes(art.id))
-        .map(art => ({ ...(editedDefaults[art.id] || art), isDefault: true }));
-
-      // Combined Live Articles
-      const allLiveArticles = [...approved, ...legacy, ...activeDefaults];
-
-      document.getElementById('pendingCount').textContent = pending.length;
-      document.getElementById('approvedCount').textContent = allLiveArticles.length;
-
-      // Render Pending
-      const pendingContainer = document.getElementById('pendingContainer');
-      if (pending.length === 0) {
-        pendingContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No pending articles waiting for approval.</p>';
-      } else {
-        pendingContainer.innerHTML = '';
-        pending.forEach(post => {
-          const item = document.createElement('div');
-          item.className = 'published-list-item';
-          item.innerHTML = `
-            <div style="flex: 1; padding-right: 20px;">
-              <span class="status-pill-pending">Pending Approval</span>
-              <h4 style="font-size: 1.08rem; color: var(--text-dark); margin: 4px 0;">${post.title}</h4>
-              <span style="font-size: 0.82rem; color: var(--text-muted);">Author: <strong>${post.author}</strong> (${post.authorRole || 'Contributor'}) &bull; Category: ${post.category} &bull; ${post.date}</span>
-              <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 6px;">${post.excerpt}</p>
-            </div>
-            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-              <button class="approve-btn" onclick="approveArticle('${post.id}')"><i data-lucide="check"></i> Approve & Publish</button>
-              <button class="edit-btn" onclick="openEditModal('${post.id}', 'pending')"><i data-lucide="edit-2"></i> Edit</button>
-              <button class="decline-btn" onclick="declineArticle('${post.id}')"><i data-lucide="x"></i> Decline</button>
-            </div>
-          `;
-          pendingContainer.appendChild(item);
-        });
+    // --- Data -------------------------------------------------------------------
+    async function loadData() {
+      try {
+        const data = await FEApi.get('submissions');
+        state = { ...data, editedDefaults: data.editedDefaults || {} };
+        renderSuperLists();
+      } catch (err) {
+        if (err.status === 401) return showLogin('Your session expired. Please log in again.');
+        document.getElementById('pendingContainer').innerHTML = `<p style="color:#DC2626;">${esc(err.message)}</p>`;
       }
+    }
 
-      // Render Approved & Live Articles
+    function liveDefaults() {
+      return defaultArticles
+        .filter(a => !state.deletedDefaultIds.includes(a.id))
+        .map(a => ({ ...a, ...(state.editedDefaults[a.id] || {}), isDefault: true }));
+    }
+
+    function findPost(id, type) {
+      if (type === 'pending') return state.pending.find(p => p.id === id);
+      return state.approved.find(p => p.id === id) || liveDefaults().find(p => p.id === id);
+    }
+
+    // --- Tabs ---------------------------------------------------------------------
+    function switchTab(tab) {
+      const pending = tab === 'pending';
+      document.getElementById('pendingSection').style.display = pending ? 'block' : 'none';
+      document.getElementById('approvedSection').style.display = pending ? 'none' : 'block';
+      document.getElementById('tabPending').classList.toggle('active', pending);
+      document.getElementById('tabApproved').classList.toggle('active', !pending);
+    }
+
+    // --- Rendering ------------------------------------------------------------------
+    function renderSuperLists() {
+      const live = [...state.approved, ...liveDefaults()];
+      document.getElementById('pendingCount').textContent = state.pending.length;
+      document.getElementById('approvedCount').textContent = live.length;
+
+      const pendingContainer = document.getElementById('pendingContainer');
+      pendingContainer.innerHTML = state.pending.length ? '' :
+        '<p style="color: var(--text-muted); font-size: 0.9rem;">No pending articles waiting for approval.</p>';
+      state.pending.forEach(post => {
+        const item = document.createElement('div');
+        item.className = 'published-list-item';
+        item.innerHTML = `
+          <div style="flex: 1; padding-right: 20px;">
+            <span class="status-pill-pending">Pending Approval</span>
+            <h4 style="font-size: 1.08rem; color: var(--text-dark); margin: 4px 0;">${esc(post.title)}</h4>
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Author: <strong>${esc(post.author)}</strong> (${esc(post.authorRole || 'Contributor')}) &bull; Category: ${esc(post.category)} &bull; ${esc(post.date)}</span>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 6px;">${esc(post.excerpt)}</p>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <button type="button" class="approve-btn" data-act="approve"><i data-lucide="check"></i> Approve & Publish</button>
+            <button type="button" class="edit-btn" data-act="edit"><i data-lucide="edit-2"></i> Edit</button>
+            <button type="button" class="decline-btn" data-act="decline"><i data-lucide="x"></i> Decline</button>
+          </div>`;
+        item.querySelector('[data-act=approve]').onclick = () => act('approve', { id: post.id }, `"${post.title}" is now live on the blog.`);
+        item.querySelector('[data-act=edit]').onclick = () => openEditModal(post.id, 'pending');
+        item.querySelector('[data-act=decline]').onclick = () => {
+          if (confirm('Decline and delete this pending submission?')) act('decline', { id: post.id });
+        };
+        pendingContainer.appendChild(item);
+      });
+
       const approvedContainer = document.getElementById('approvedContainer');
-      if (allLiveArticles.length === 0) {
+      if (!live.length) {
         approvedContainer.innerHTML = `
           <div style="text-align: center; padding: 30px; background: var(--bg-cream-alt); border-radius: var(--radius-md);">
             <p style="color: var(--text-dark); font-weight: 700; font-size: 1.05rem; margin-bottom: 12px;">All blog articles have been deleted from the website.</p>
-            <button class="btn btn-primary-gold" onclick="restoreDefaultArticles()"><i data-lucide="rotate-ccw"></i> Restore Default Articles</button>
-          </div>
-        `;
+            <button type="button" class="btn btn-primary-gold" id="restoreBtn"><i data-lucide="rotate-ccw"></i> Restore Built-in Articles</button>
+          </div>`;
       } else {
-        let html = `
-          <div style="display: flex; justify-content: space-between; align-items: center; background: #FFFBEB; border: 1px solid #FCD34D; padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 20px;">
+        approvedContainer.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: #FFFBEB; border: 1px solid #FCD34D; padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 20px;">
             <span style="color: #92400E; font-size: 0.9rem; font-weight: 700;">
-              <i data-lucide="shield-alert" style="vertical-align: middle; margin-right: 6px;"></i> Admin Control: You have rights to delete ANY article or clear all live blogs.
+              <i data-lucide="shield-alert" style="vertical-align: middle; margin-right: 6px;"></i> Changes here update the public blog for every visitor.
             </span>
-            <div style="display: flex; gap: 10px;">
-              ${deletedDefaultIds.length > 0 ? '<button class="btn" onclick="restoreDefaultArticles()" style="background: var(--gold-pale); color: var(--text-dark); font-size: 0.82rem; padding: 6px 14px;"><i data-lucide="rotate-ccw"></i> Restore Defaults</button>' : ''}
-              <button class="decline-btn" onclick="deleteAllLiveArticles()" style="padding: 6px 16px;"><i data-lucide="trash-2"></i> Delete ALL Live Blogs</button>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              ${state.deletedDefaultIds.length || Object.keys(state.editedDefaults).length ? '<button type="button" class="btn" id="restoreBtn" style="background: var(--gold-pale); color: var(--text-dark); font-size: 0.82rem; padding: 6px 14px;"><i data-lucide="rotate-ccw"></i> Restore Built-in Articles</button>' : ''}
+              <button type="button" class="decline-btn" id="deleteAllBtn" style="padding: 6px 16px;"><i data-lucide="trash-2"></i> Delete ALL Live Blogs</button>
             </div>
-          </div>
-        `;
-        approvedContainer.innerHTML = html;
-
-        allLiveArticles.forEach(post => {
+          </div>`;
+        live.forEach(post => {
           const item = document.createElement('div');
           item.className = 'published-list-item';
-          const typeBadge = post.isDefault ? 
-            '<span class="status-pill-live" style="background: #E0F2FE; color: #0369A1;">Built-in Article</span>' : 
-            '<span class="status-pill-live">Custom Approved</span>';
-
           item.innerHTML = `
             <div style="flex: 1; padding-right: 20px;">
               <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
-                ${typeBadge}
-                <span style="font-size: 0.78rem; color: #003087; font-weight: 700; text-transform: uppercase;">${post.category}</span>
+                ${post.isDefault ? '<span class="status-pill-live" style="background: #E0F2FE; color: #0369A1;">Built-in Article</span>' : '<span class="status-pill-live">Custom Approved</span>'}
+                <span style="font-size: 0.78rem; color: #003087; font-weight: 700; text-transform: uppercase;">${esc(post.category)}</span>
               </div>
-              <h4 style="font-size: 1.08rem; color: var(--text-dark); margin: 2px 0;">${post.title}</h4>
-              <span style="font-size: 0.82rem; color: var(--text-muted);">Author: <strong>${post.author}</strong> &bull; Date: ${post.date}</span>
+              <h4 style="font-size: 1.08rem; color: var(--text-dark); margin: 2px 0;">${esc(post.title)}</h4>
+              <span style="font-size: 0.82rem; color: var(--text-muted);">Author: <strong>${esc(post.author)}</strong> &bull; Date: ${esc(post.date)}</span>
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
-              <a href="blog.html" target="_blank" class="btn" style="background: var(--gold-pale); color: var(--text-dark); padding: 6px 12px; font-size: 0.8rem;">View Live &nearr;</a>
-              <button class="edit-btn" onclick="openEditModal('${post.id}', 'live')">Edit</button>
-              <button class="decline-btn" onclick="deleteLiveArticle('${post.id}', ${post.isDefault || false})">Delete</button>
-            </div>
-          `;
+              <a href="blog.html#${encodeURIComponent(post.id)}" target="_blank" rel="noopener" class="btn" style="background: var(--gold-pale); color: var(--text-dark); padding: 6px 12px; font-size: 0.8rem;">View Live &nearr;</a>
+              <button type="button" class="edit-btn" data-act="edit">Edit</button>
+              <button type="button" class="decline-btn" data-act="delete">Delete</button>
+            </div>`;
+          item.querySelector('[data-act=edit]').onclick = () => openEditModal(post.id, 'live');
+          item.querySelector('[data-act=delete]').onclick = () => {
+            if (confirm('Delete this article from the live website?')) {
+              act('delete', { id: post.id, isDefault: !!post.isDefault }, 'Article deleted from the live blog.');
+            }
+          };
           approvedContainer.appendChild(item);
         });
       }
 
+      const restoreBtn = document.getElementById('restoreBtn');
+      if (restoreBtn) restoreBtn.onclick = () => {
+        if (confirm('Restore the built-in articles (undoing their edits and deletions)?')) {
+          act('restore_defaults', {}, 'Built-in articles restored.');
+        }
+      };
+      const deleteAllBtn = document.getElementById('deleteAllBtn');
+      if (deleteAllBtn) deleteAllBtn.onclick = () => {
+        if (confirm('DANGER: Delete ALL live blog articles? The blog page will be empty.')) {
+          act('delete_all', { defaultIds: defaultArticles.map(a => a.id) }, 'All live articles have been deleted.');
+        }
+      };
+
       if (window.refreshIcons) window.refreshIcons();
     }
 
-    // Approve Handler
-    function approveArticle(id) {
-      let pending = JSON.parse(localStorage.getItem('future_edge_pending_blogs') || '[]');
-      let approved = JSON.parse(localStorage.getItem('future_edge_approved_blogs') || '[]');
-
-      const postIndex = pending.findIndex(p => p.id === id);
-      if (postIndex !== -1) {
-        const post = pending[postIndex];
-        post.status = 'approved';
-        approved.unshift(post);
-        pending.splice(postIndex, 1);
-
-        localStorage.setItem('future_edge_pending_blogs', JSON.stringify(pending));
-        localStorage.setItem('future_edge_approved_blogs', JSON.stringify(approved));
-
-        alert(`Article "${post.title}" has been approved and is now live on the blog page!`);
-        renderSuperLists();
-      }
-    }
-
-    // Decline Handler
-    function declineArticle(id) {
-      if (confirm('Decline and delete this pending submission?')) {
-        let pending = JSON.parse(localStorage.getItem('future_edge_pending_blogs') || '[]');
-        pending = pending.filter(p => p.id !== id);
-        localStorage.setItem('future_edge_pending_blogs', JSON.stringify(pending));
-        renderSuperLists();
-      }
-    }
-
-    // Delete Single Live Article (Default or Custom)
-    function deleteLiveArticle(id, isDefault) {
-      if (confirm('Are you sure you want to delete this article from the live website?')) {
-        if (isDefault || id.startsWith('post-')) {
-          let deletedDefaultIds = JSON.parse(localStorage.getItem('future_edge_deleted_default_ids') || '[]');
-          if (!deletedDefaultIds.includes(id)) {
-            deletedDefaultIds.push(id);
-            localStorage.setItem('future_edge_deleted_default_ids', JSON.stringify(deletedDefaultIds));
-          }
-        } else {
-          let approved = JSON.parse(localStorage.getItem('future_edge_approved_blogs') || '[]');
-          approved = approved.filter(p => p.id !== id);
-          localStorage.setItem('future_edge_approved_blogs', JSON.stringify(approved));
-
-          let legacy = JSON.parse(localStorage.getItem('future_edge_custom_blogs') || '[]');
-          legacy = legacy.filter(p => p.id !== id);
-          localStorage.setItem('future_edge_custom_blogs', JSON.stringify(legacy));
-        }
-
-        alert('Article deleted from live blog page!');
-        renderSuperLists();
-      }
-    }
-
-    // Delete ALL Live Articles
-    function deleteAllLiveArticles() {
-      if (confirm('DANGER: Are you sure you want to delete ALL live blog articles from the website? The blog page will be empty.')) {
-        localStorage.setItem('future_edge_approved_blogs', JSON.stringify([]));
-        localStorage.setItem('future_edge_custom_blogs', JSON.stringify([]));
-
-        const allDefaultIds = defaultArticlesData.map(a => a.id);
-        localStorage.setItem('future_edge_deleted_default_ids', JSON.stringify(allDefaultIds));
-
-        alert('All live articles have been deleted from the website!');
-        renderSuperLists();
-      }
-    }
-
-    // Restore Default Articles
-    function restoreDefaultArticles() {
-      if (confirm('Restore default built-in articles back to the blog page?')) {
-        localStorage.removeItem('future_edge_deleted_default_ids');
-        localStorage.removeItem('future_edge_edited_default_blogs');
-        alert('Default articles restored successfully!');
-        renderSuperLists();
-      }
-    }
-
-    // Modal Edit Functions
-    let currentEditType = 'pending';
+    // --- Edit modal --------------------------------------------------------------------
+    let editing = null;
+    const field = id => document.getElementById(id);
 
     function openEditModal(id, type) {
-      currentEditType = type;
-      let post = null;
-
-      if (type === 'pending') {
-        const pending = JSON.parse(localStorage.getItem('future_edge_pending_blogs') || '[]');
-        post = pending.find(p => p.id === id);
-      } else {
-        const approved = JSON.parse(localStorage.getItem('future_edge_approved_blogs') || '[]');
-        const legacy = JSON.parse(localStorage.getItem('future_edge_custom_blogs') || '[]');
-        const editedDefaults = JSON.parse(localStorage.getItem('future_edge_edited_default_blogs') || '{}');
-
-        post = approved.find(p => p.id === id) || 
-               legacy.find(p => p.id === id) || 
-               editedDefaults[id] || 
-               defaultArticlesData.find(p => p.id === id);
-      }
-
+      const post = findPost(id, type);
       if (!post) return;
+      editing = { id, type, isDefault: !!post.isDefault };
 
-      document.getElementById('editPostId').value = post.id;
-      document.getElementById('editTitle').value = post.title;
-      document.getElementById('editCategory').value = post.category;
-      document.getElementById('editReadTime').value = post.readTime || '5 min read';
-      document.getElementById('editAuthor').value = post.author;
-      document.getElementById('editRole').value = post.authorRole || '';
-      document.getElementById('editCoverImage').value = post.coverImage || '';
-      document.getElementById('editVideoUrl').value = post.videoUrl || '';
-      document.getElementById('editExcerpt').value = post.excerpt || '';
-      document.getElementById('editTakeaways').value = post.takeaways ? post.takeaways.join('\n') : '';
-      document.getElementById('editContent').value = post.content || '';
+      field('editPostId').value = post.id;
+      field('editTitle').value = post.title || '';
+      field('editCategory').value = post.category || '';
+      field('editReadTime').value = post.readTime || '5 min read';
+      field('editAuthor').value = post.author || '';
+      field('editRole').value = post.authorRole || '';
+      field('editCoverImage').value = post.coverImage || '';
+      field('editVideoUrl').value = post.videoUrl || '';
+      field('editExcerpt').value = post.excerpt || '';
+      field('editTakeaways').value = (post.takeaways || []).join('\n');
+      field('editContent').value = post.content || '';
+      field('saveEditBtn').innerHTML = type === 'pending' ? 'Save &amp; Approve Article &rarr;' : 'Save Changes &rarr;';
 
-      const modal = document.getElementById('editModalBackdrop');
+      const modal = field('editModalBackdrop');
       modal.classList.add('open');
       modal.inert = false;
       document.body.style.overflow = 'hidden';
-      document.getElementById('editTitle').focus();
+      field('editTitle').focus();
     }
 
     function closeEditModal() {
-      const modal = document.getElementById('editModalBackdrop');
+      const modal = field('editModalBackdrop');
       modal.classList.remove('open');
       modal.inert = true;
       document.body.style.overflow = '';
     }
 
-    document.getElementById('closeEditModalBtn').addEventListener('click', closeEditModal);
-    document.getElementById('cancelEditBtn').addEventListener('click', closeEditModal);
-    document.getElementById('editModalBackdrop').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) closeEditModal();
-    });
+    field('closeEditModalBtn').addEventListener('click', closeEditModal);
+    field('cancelEditBtn').addEventListener('click', closeEditModal);
+    field('editModalBackdrop').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeEditModal(); });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && document.getElementById('editModalBackdrop').classList.contains('open')) closeEditModal();
+      if (e.key === 'Escape' && field('editModalBackdrop').classList.contains('open')) closeEditModal();
     });
 
-    document.getElementById('editArticleForm').addEventListener('submit', (e) => {
+    field('editArticleForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const id = document.getElementById('editPostId').value;
-      let pending = JSON.parse(localStorage.getItem('future_edge_pending_blogs') || '[]');
-      let approved = JSON.parse(localStorage.getItem('future_edge_approved_blogs') || '[]');
-
-      if (id.startsWith('post-')) {
-        // Editing a default article
-        let editedDefaults = JSON.parse(localStorage.getItem('future_edge_edited_default_blogs') || '{}');
-        const orig = defaultArticlesData.find(d => d.id === id) || {};
-        editedDefaults[id] = {
-          ...orig,
-          id,
-          title: document.getElementById('editTitle').value.trim(),
-          category: document.getElementById('editCategory').value,
-          readTime: document.getElementById('editReadTime').value.trim(),
-          author: document.getElementById('editAuthor').value.trim(),
-          authorRole: document.getElementById('editRole').value.trim(),
-          coverImage: document.getElementById('editCoverImage').value.trim(),
-          videoUrl: document.getElementById('editVideoUrl').value.trim(),
-          excerpt: document.getElementById('editExcerpt').value.trim(),
-          content: document.getElementById('editContent').value.trim(),
-          takeaways: document.getElementById('editTakeaways').value.trim().split('\n').filter(t => t.trim() !== '')
-        };
-        localStorage.setItem('future_edge_edited_default_blogs', JSON.stringify(editedDefaults));
-        alert('Default article updated live!');
-      } else {
-        let post = pending.find(p => p.id === id) || approved.find(p => p.id === id);
-        if (post) {
-          post.title = document.getElementById('editTitle').value.trim();
-          post.category = document.getElementById('editCategory').value;
-          post.readTime = document.getElementById('editReadTime').value.trim();
-          post.author = document.getElementById('editAuthor').value.trim();
-          post.authorRole = document.getElementById('editRole').value.trim();
-          post.coverImage = document.getElementById('editCoverImage').value.trim();
-          post.videoUrl = document.getElementById('editVideoUrl').value.trim();
-          post.excerpt = document.getElementById('editExcerpt').value.trim();
-          post.content = document.getElementById('editContent').value.trim();
-          post.takeaways = document.getElementById('editTakeaways').value.trim().split('\n').filter(t => t.trim() !== '');
-
-          if (currentEditType === 'pending') {
-            post.status = 'approved';
-            pending = pending.filter(p => p.id !== id);
-            approved.unshift(post);
-            localStorage.setItem('future_edge_pending_blogs', JSON.stringify(pending));
-            localStorage.setItem('future_edge_approved_blogs', JSON.stringify(approved));
-            alert('Article updated and approved live!');
-          } else {
-            localStorage.setItem('future_edge_approved_blogs', JSON.stringify(approved));
-            alert('Live article updated successfully!');
-          }
-        }
-      }
-
-      closeEditModal();
-      renderSuperLists();
+      if (!editing) return;
+      const post = {
+        title: field('editTitle').value.trim(),
+        category: field('editCategory').value,
+        readTime: field('editReadTime').value.trim(),
+        author: field('editAuthor').value.trim(),
+        authorRole: field('editRole').value.trim(),
+        coverImage: field('editCoverImage').value.trim(),
+        videoUrl: field('editVideoUrl').value.trim(),
+        excerpt: field('editExcerpt').value.trim(),
+        content: field('editContent').value.trim(),
+        takeaways: field('editTakeaways').value.split('\n').map(t => t.trim()).filter(Boolean)
+      };
+      const original = editing.isDefault ? defaultArticles.find(a => a.id === editing.id) : null;
+      const ok = await act('update', {
+        id: editing.id,
+        post,
+        approve: editing.type === 'pending',
+        isDefault: editing.isDefault,
+        original
+      }, editing.type === 'pending' ? 'Article updated and published.' : 'Article updated.');
+      if (ok) closeEditModal();
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      checkSuperAuth();
-    });
+    document.addEventListener('DOMContentLoaded', checkSuperAuth);
   </script>
 </body>
 
